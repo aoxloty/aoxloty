@@ -117,6 +117,27 @@
     font-family: fontAwesome;
     content: "\f0ac\00a0";
                 }
+	.button1.button-left:before {
+      content: "\f060\00a0"; 
+}
+    .button1.button-left:hover {
+	   background-color: Purple;
+       color: white;
+	
+	}			
+	.button-left {
+	  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  border: none;
+  padding: 15px 4.5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  cursor: pointer;
+  width: 80px;
+	}			
     @media (max-width: 480px) {
       body {
         padding: 2rem;
@@ -127,6 +148,11 @@
 	  .button {
 	    top: 1.5rem;
 		right: 1.5rem;
+	  }
+	  .button-left {
+	    top: 1.5rem;
+        left: 1.5rem;
+		width: 80px;
 	  }
     }
   </style>
@@ -156,12 +182,14 @@
 
   <div class="container">
     <a class="button button1" href="../index.html" ><b>ENG</b></a>
+	<a class="button1 button-left" onclick="history.back()" ><b>Back</b></a>
        <div style="height: 3rem;"></div>
     <div class="badge">Only in Vietnam!</div>
 	
     <h1><b>Aoxloty</b></h1>
     <p>Nếu bạn muốn giúp tui và đang ở Việt Nam, thì đây chính là cách!</p>
     <img src="./qr-momo.png" alt="Vietinbank QR code" class="qr" id="qrCodeImage"/ >
+	 <p>108881886905</p>
 	 <div style="height: 0.01rem;"></div>
 	<button class="button2" onclick="downloadQR()"><i class="fa fa-cloud-download"></i> <b>Tải về</b></button></br>
 	
