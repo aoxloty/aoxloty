@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <link href="favicon.ico" rel="icon" type="image/x-icon">
+  <link href="../favicon.ico" rel="icon" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Support me</title>
+  <title>Giúp tui!</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
   <style>
+  
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+	
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #fdfbfb, #ebedee);
-	  background-image:url('artfightlol.png');
+	  background-image:url('vietnam.png');
 	  background-repeat: no-repeat;
 	  background-position: center;
 	  background-attachment: fixed;
@@ -32,21 +34,21 @@
     }
     .container {
 	  position: relative;
-      background: #fff;
+      background: #f2f6f9;
       padding: 2.5rem;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 50);
       max-width: 500px;
       width: 100%;
       text-align: center;
-      animation: fadeIn 0.5s ease-in-out;
+      animation: fadeIn 0.8s ease-in-out;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
     h1 {
-      color: #1c5ee3;
+      color: orange;
       font-size: 2.2rem;
       margin-bottom: 1rem;
     }
@@ -59,54 +61,41 @@
       width: 260px;
       max-width: 100%;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 10);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
       margin-bottom: 1.5rem;
     }
-	.axolotl-wrapper {
-    display: flex;
-    justify-content: center; /* Căn giữa hoàn hảo theo chiều ngang */
-    margin-top: 1rem; 
-    margin-bottom: 1.5rem;
-}
-	.axolotl-img {
-    display: block; 
-	image-rendering: pixelated;
-}
     .footer {
-      margin-top: 1rem;
+      margin-top: 2rem;
       font-size: 0.9rem;
       color: #999;
     }
-	.wplace-link,
-.wplace-link:link,
-.wplace-link:visited,
-.wplace-link:hover,
-.wplace-link:active {
-    
-    
-    /* 2. Giữ màu chữ (thường là màu trắng hoặc màu kế thừa từ badge) */
-    /* Dùng 'inherit' để đảm bảo nó lấy màu chữ của badge (ví dụ: màu trắng) */
-    color: inherit; 
-    
-    /* HOẶC bạn có thể đặt màu cố định, ví dụ: */
-    /* color: white; */ 
-}
     .badge {
       display: inline-block;
-      background: #1c5ee3;
-      color: white;
+      background: red;
+      color: yellow;
       font-size: 1rem;
       padding: 6px 14px;
       border-radius: 30px;
-      
-	  margin-top:0.1rem;
+      margin-bottom: 1rem;
     }
-    .button-left {
-    right: auto; /* Hủy bỏ thuộc tính right của .button */
-    left: 2.5rem; /* Đặt vị trí 2.5rem từ lề trái */
+    .button2 {
+  width: 185px; height: 55px;
+  background-color: #f2f6f9;
+  border: 2px solid #1c5ee3 ;
+  border-radius: 50px;
+  color: #552fab;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 25px;
+  font-family: "Inter", Monospace;
+} 
 
+/* Darker background on mouse-over */
+  .button2:hover {
+  background-color: #1c5ee3;
+  color: white;
 }
-  
+   
 	.button {
   position: absolute;
   top: 2.5rem;
@@ -121,22 +110,21 @@
     }
     .button1 {width: 70px; height: 50px; border: 1px; border-radius: 5px;}
     .button1:hover {
-      background-color: red;
-      color: yellow;
+      background-color: #1c5ee3;
+      color: white;
                }
     .button1:before {
     font-family: fontAwesome;
     content: "\f0ac\00a0";
                 }
-    .button1.button-left:before {
-      content: "\f015\00a0"; 
+	.button1.button-left:before {
+      content: "\f060\00a0"; 
 }
     .button1.button-left:hover {
 	   background-color: Purple;
        color: white;
 	
-	
-	}
+	}			
 	.button-left {
 	  position: absolute;
   top: 2.5rem;
@@ -148,8 +136,8 @@
   display: inline-block;
   font-size: 17px;
   cursor: pointer;
-  width: 100px;
-	}
+  width: 80px;
+	}			
     @media (max-width: 480px) {
       body {
         padding: 2rem;
@@ -157,11 +145,12 @@
       .container {
         padding: 2rem;
       }
-	  .button1 {
+	  .button {
 	    top: 1.5rem;
 		right: 1.5rem;
-		}
+	  }
 	  .button-left {
+	    top: 1.5rem;
         left: 1.5rem;
 		width: 80px;
 	  }
@@ -170,30 +159,49 @@
 </head>
 <script>
     document.oncontextmenu = function () { return false; }
+
+ 
+    function downloadQR() {
+        // Lấy thẻ hình ảnh mã QR (dùng ID đã thêm)
+        var qrImage = document.getElementById('qrCodeImage');
+        
+        // Tạo thẻ <a> tạm thời trong bộ nhớ
+        var link = document.createElement('a');
+        
+        // Thiết lập đường dẫn và tên file tải xuống
+        link.href = qrImage.src; // Lấy đường dẫn ảnh từ thẻ <img>
+        link.download = 'Aoxloty_VietinBank_QR.png';
+        
+        // Kích hoạt việc tải xuống (bắt chước hành vi bấm vào thẻ <a>)
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Xóa thẻ <a> tạm thời
+    }
 </script>
 <body onmousedown="return false" onselectstart="return false">
 
   <div class="container">
-    <a class="button button1" href="vn/vn.html" ><b>VN</b></a>
-	<a class="button1 button-left" href="https://guns.lol/aoxloty" ><b>Home</b></a>
-    
-	   <div style="height: 3rem;"></div>
-	<h1><b>Aoxloty</b></h1>
-	<p>For international payment!</p>
-    <a target="blank" href="https://www.buymeacoffee.com/aoxloty"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=aoxloty&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
-	<div style="height: 0rem;"></div>
-	<div class="axolotl-wrapper">
-	<img class="axolotl-img" src="vn/fun.png" alt="Yellow Axolotl F">
-    </div>
-	<div class="badge">Had been on <a href="https://wplace.samuelscheit.com/#z=15.00&lat=21.11746&lng=105.79732&time=2025-08-09T20-01-14.231Z&zoom=15.00" target="blank" class="wplace-link"><b>WPlace</b></a>!</div>
+    <a class="button button1" href="../index.html" ><b>ENG</b></a>
+	<a class="button1 button-left" onclick="history.back()" ><b>Back</b></a>
+       <div style="height: 3rem;"></div>
+    <div class="badge">Only in Vietnam!</div>
+	
+    <h1><b>Aoxloty</b></h1>
+    <p>Nếu bạn muốn giúp tui và đang ở Việt Nam, thì đây chính là cách!</p>
+    <img src="./qr-momo.png" alt="Vietinbank QR code" class="qr" id="qrCodeImage"/ >
+	 <p>108881886905</p>
+	 <div style="height: 0.01rem;"></div>
+	<button class="button2" onclick="downloadQR()"><i class="fa fa-cloud-download"></i> <b>Tải về</b></button></br>
+	
+	<div style="height: 1rem;"></div>
+    <p>Quét mã bằng app ngân hàng hoặc app thanh toán của bạn.</p>
     <div class="footer">
-	
-	
-      Thank you so much💛<br/>
+      Cảm ơn bạn nhiều nha💛<br/>
       ©2025 Aoxloty.<br/>
       Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank">congtuuit</a>.
     </div>
   </div>
 
 </body>
+
 </html>
