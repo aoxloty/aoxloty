@@ -198,7 +198,9 @@
     document.oncontextmenu = function () { return false; }
     function downloadQR() {
         var qrImage = document.getElementById('qrCodeImage');
-        var link = document.createElement('a');
+        var imageUrl = qrImage.src;
+		var link = document.createElement('a');
+		link.href = imageUrl;
         link.download = 'Aoxloty_VietinBank_QR.png';
         document.body.appendChild(link);
         link.click();
