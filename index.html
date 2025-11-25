@@ -63,34 +63,32 @@
       margin-bottom: 1.5rem;
     }
 	.axolotl-wrapper {
-    display: flex;
-    justify-content: center; /* Căn giữa hoàn hảo theo chiều ngang */
-    margin-top: 1rem; 
-    margin-bottom: 1.5rem;
-}
+      display: flex;
+      justify-content: center; 
+      margin-top: 1rem; 
+      margin-bottom: 1.5rem;
+    }
 	.axolotl-img {
-    display: block; 
-	image-rendering: pixelated;
-}
+      display: block; 
+   	  image-rendering: pixelated;
+    }
     .footer {
       margin-top: 1rem;
       font-size: 0.9rem;
       color: #999;
     }
-	.wplace-link,
-.wplace-link:link,
-.wplace-link:visited,
-.wplace-link:hover,
-.wplace-link:active {
-    
-    
-    /* 2. Giữ màu chữ (thường là màu trắng hoặc màu kế thừa từ badge) */
-    /* Dùng 'inherit' để đảm bảo nó lấy màu chữ của badge (ví dụ: màu trắng) */
-    color: inherit; 
-    
-    /* HOẶC bạn có thể đặt màu cố định, ví dụ: */
-    /* color: white; */ 
-}
+	.wplace-link:link {
+      color: white;
+	}
+    .wplace-link:visited {
+      color: white;
+	}
+    .wplace-link:hover {
+	  color: white;
+	}
+    .wplace-link:active {
+      color: white;
+	}
     .badge {
       display: inline-block;
       background: #1c5ee3;
@@ -98,57 +96,77 @@
       font-size: 1rem;
       padding: 6px 14px;
       border-radius: 30px;
-      
 	  margin-top:0.1rem;
     }
-    .button-left {
-    right: auto; /* Hủy bỏ thuộc tính right của .button */
-    left: 2.5rem; /* Đặt vị trí 2.5rem từ lề trái */
-
-}
-  
+	.button-bottom-right {
+	  position: absolute;
+      bottom: 2.5rem;
+	  right: 2.5rem;
+	  border: none;
+  	  padding: 15px 8px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  cursor: pointer;
+	  .button-left {
+	    right: auto; 
+	    left: 2.5rem;
+	   }
+	   width: 60px;
+       height: 50px;
+       border: 1px;
+       border-radius: 5px;
+	   font-size: 17px;
+	}
+	.button-bottom-right:hover {
+	   background-color: red;
+       color: yellow;
+	}
+	.button-bottom-right:before {
+	   font-family: fontAwesome;
+       content: "\f0da\00a0";
+	}
 	.button {
-  position: absolute;
-  top: 2.5rem;
-  right: 2.5rem;
-  border: none;
-  padding: 15px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      border: none;
+      padding: 15px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
     }
     .button1 {width: 70px; height: 50px; border: 1px; border-radius: 5px;}
     .button1:hover {
       background-color: red;
       color: yellow;
-               }
+    }
     .button1:before {
-    font-family: fontAwesome;
-    content: "\f0ac\00a0";
-                }
+      font-family: fontAwesome;
+      content: "\f0ac\00a0";
+    }
     .button1.button-left:before {
       content: "\f015\00a0"; 
-}
+    }
     .button1.button-left:hover {
-	   background-color: Purple;
-       color: white;
-	
-	
+	  background-color: Purple;
+      color: white;
 	}
 	.button-left {
 	  position: absolute;
-  top: 2.5rem;
-  left: 2.5rem;
-  border: none;
-  padding: 15px 4.5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 17px;
-  cursor: pointer;
-  width: 100px;
+      top: 2.5rem;
+      left: 2.5rem;
+      border: none;
+      padding: 15px 4.5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 17px;
+      cursor: pointer;
+      width: 100px;
 	}
     @media (max-width: 480px) {
       body {
@@ -160,24 +178,54 @@
 	  .button1 {
 	    top: 1.5rem;
 		right: 1.5rem;
-		}
+	  }
 	  .button-left {
         left: 1.5rem;
 		width: 80px;
+	  }
+	  .button-bottom-right {
+	    bottom: 1.5rem;
+        right: 1.5rem;
 	  }
     }
   </style>
 </head>
 <script>
     document.oncontextmenu = function () { return false; }
+	document.onkeypress = function (event) {
+	event = (event || window.event);
+	   if (event.keyCode == 123) {
+	   return false;
+	}
+	}
+	document.onmousedown = function (event) {
+	event = (event || window.event);
+	   if (event.keyCode == 123) {
+	   return false;
+	}
+	}
+	document.onkeydown = function (event) {
+	event = (event || window.event);
+	   if (event.keyCode == 123) {
+	   return false;
+	}
+	}
+	document.addEventListener("keydown", function (event){
+	   if (event.ctrlKey){
+	 	  event.preventDefault();
+		 }
+	   if(event.keyCode == 123){
+		  event.preventDefault();
+		 }
+	})
 </script>
 <body onmousedown="return false" onselectstart="return false">
 
   <div class="container">
     <a class="button button1" href="vn/vn.html" ><b>VN</b></a>
 	<a class="button1 button-left" href="https://guns.lol/aoxloty" ><b>Home</b></a>
-    
-	   <div style="height: 3rem;"></div>
+	<a class="button-bottom-right" href="earlytest/test.html" ><b>Test</b></a>
+	<div style="height: 3rem;"></div>
 	<h1><b>Aoxloty</b></h1>
 	<p>For international payment!</p>
     <a target="blank" href="https://www.buymeacoffee.com/aoxloty"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=aoxloty&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
@@ -187,8 +235,6 @@
     </div>
 	<div class="badge">Had been on <a href="https://wplace.samuelscheit.com/#z=15.00&lat=21.11746&lng=105.79732&time=2025-08-09T20-01-14.231Z&zoom=15.00" target="blank" class="wplace-link"><b>WPlace</b></a>!</div>
     <div class="footer">
-	
-	
       Thank you so much💛<br/>
       ©2025 Aoxloty.<br/>
       Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank">congtuuit</a>.
