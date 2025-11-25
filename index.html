@@ -48,7 +48,7 @@
     h1 {
       color: #1c5ee3;
       font-size: 2.2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
     p {
       font-size: 1.1rem;
@@ -100,10 +100,10 @@
     }
 	.button-bottom-right {
 	  position: absolute;
-      bottom: 2.5rem;
-	  right: 2.5rem;
+      bottom: -50px;
+	  right: 20px;
 	  border: none;
-  	  padding: 15px 8px;
+  	  padding: 12px 8px;
 	  text-align: center;
 	  text-decoration: none;
 	  display: inline-block;
@@ -113,11 +113,11 @@
 	    right: auto; 
 	    left: 2.5rem;
 	   }
-	   width: 60px;
-       height: 50px;
-       border: 1px;
-       border-radius: 5px;
-	   font-size: 17px;
+	  width: 60px;
+      height: 45px;
+      border: 1px;
+      border-radius: 5px;
+	  font-size: 17px;
 	}
 	.button-bottom-right:hover {
 	   background-color: red;
@@ -126,6 +126,18 @@
 	.button-bottom-right:before {
 	   font-family: fontAwesome;
        content: "\f0da\00a0";
+	}
+	.button-bottom-right:link {
+      color: white;
+	}
+    .button-bottom-right:visited {
+      color: white;
+	}
+    .button-bottom-right:hover {
+	  color: white;
+	}
+    .button-bottom-right:active {
+      color: white;
 	}
 	.button {
       position: absolute;
@@ -168,6 +180,46 @@
       cursor: pointer;
       width: 100px;
 	}
+	.text-bottom-left {
+      position: absolute;
+      bottom: -60px;
+      left: 20px;
+      font-size: 16px; 
+      color: #333; 
+      padding: 0 5px; 
+      white-space: nowrap;
+      background-color: #fff; 
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    }
+	.text-rls:link {
+      color: #333;
+	  text-decoration: none;
+	}
+    .text-rls:visited {
+      color: #333;
+	  text-decoration: none;
+	}
+    .text-rls:hover {
+	  color: #333;
+	  text-decoration: none;
+	}
+    .text-rls:active {
+      color: #333;
+	  text-decoration: none;
+	}
+	.text-cre:link {
+	  text-decoration: none;
+	}
+    .text-cre:visited {
+	  text-decoration: none;
+	}
+    .text-cre:hover {
+	  text-decoration: none;
+	}
+    .text-cre:active {
+	  text-decoration: none;
+	}
     @media (max-width: 480px) {
       body {
         padding: 2rem;
@@ -184,9 +236,13 @@
 		width: 80px;
 	  }
 	  .button-bottom-right {
-	    bottom: 1.5rem;
-        right: 1.5rem;
+	    bottom: -50px;
+        right: 20px;
 	  }
+	  .text-bottom-left {
+	    bottom: -50px;
+        left: -27px;
+	  }
     }
   </style>
 </head>
@@ -217,8 +273,8 @@
 	   if(event.keyCode == 123){
 		  event.preventDefault();
 		 }
-	})
-</script>
+	})  
+</script> 
 <body onmousedown="return false" onselectstart="return false">
 
   <div class="container">
@@ -237,8 +293,9 @@
     <div class="footer">
       Thank you so much💛<br/>
       ©2025 Aoxloty.<br/>
-      Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank">congtuuit</a>.
+      Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank" class="text-cre">congtuuit</a>.
     </div>
+	<p class="text-bottom-left" ><a href="https://github.com/aoxloty/aoxloty.github.io/releases" target="blank" class="text-rls">v205.1125</a></p>
   </div>
 
 </body>

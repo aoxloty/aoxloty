@@ -50,11 +50,16 @@
     h1 {
       color: orange;
       font-size: 2.2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
     p {
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
+      color: #555;
+    }
+	.text-scan {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
       color: #555;
     }
 	#accountNumber {
@@ -76,7 +81,7 @@
       margin-bottom: 0.5rem;
     }
     .footer {
-      margin-top: 2rem;
+      margin-top: 0.8rem;
       font-size: 0.9rem;
       color: #999;
     }
@@ -147,6 +152,47 @@
 	  cursor: pointer;
 	  width: 80px;
 	}			
+	.text-bottom-left {
+      position: absolute;
+      bottom: -60px;
+      left: 20px;
+      font-size: 16px; 
+      color: #333; 
+      padding: 0 5px; 
+      white-space: nowrap;
+      background-color: #fff; 
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    }
+	.text-rls:link {
+      color: #333;
+	  text-decoration: none;
+	}
+    .text-rls:visited {
+      color: #333;
+	  text-decoration: none;
+	}
+    .text-rls:hover {
+	  color: #333;
+	  text-decoration: none;
+	}
+    .text-rls:active {
+      color: #333;
+	  text-decoration: none;
+	  }
+	.text-cre:link {
+	  text-decoration: none;
+	  }
+    .text-cre:visited {
+	  text-decoration: none;
+	  }
+    .text-cre:hover {
+	  text-decoration: none;
+	  }
+    .text-cre:active {
+	  text-decoration: none;
+	  }
+	
     @media (max-width: 480px) {
       body {
         padding: 2rem;
@@ -163,7 +209,11 @@
         left: 1.5rem;
 		width: 80px;
 	  }
-    }
+	  .text-bottom-left {
+	    bottom: -50px;
+        left: -27px;
+	  }
+	}
   </style>
 </head>
 <script>
@@ -250,12 +300,13 @@
 	<div style="height: 0.001rem;"></div>
 	<button class="button2" onclick="downloadQR()"><i class="fa fa-cloud-download"></i> <b>Tải về</b></button>
 	<div style="height: 1rem;"></div>
-    <p>Quét mã bằng app ngân hàng hoặc app thanh toán của bạn.</p>
+    <p class="text-scan">Quét mã bằng app ngân hàng hoặc app thanh toán của bạn.</p>
     <div class="footer">
       Cảm ơn bạn nhiều nha💛<br/>
       ©2025 Aoxloty.<br/>
-      Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank">congtuuit</a>.
+      Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank" class="text-cre">congtuuit</a>.
     </div>
+	<p class="text-bottom-left" ><a href="https://github.com/aoxloty/aoxloty.github.io/releases" target="blank" class="text-rls">v205.1125</a></p>
   </div>
 </body>
 </html>
