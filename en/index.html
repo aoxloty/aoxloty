@@ -71,6 +71,11 @@
 	.axolotl-img {
       display: block; 
    	  image-rendering: pixelated;
+	  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    }
+	.axolotl-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(255, 255, 0, 0.8); 
     }
     .footer {
       margin-top: 1rem;
@@ -97,6 +102,11 @@
       padding: 6px 14px;
       border-radius: 30px;
 	  margin-top:0.1rem;
+	  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    }
+	.badge:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(28, 94, 227, 0.5);
     }
 	.button-bottom-right {
 	  position: absolute;
@@ -220,6 +230,12 @@
     .text-cre:active {
 	  text-decoration: none;
 	}
+	img[src*="buymeacoffee"] {
+	  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+	}
+	img[src*="buymeacoffee"]:hover {
+        transform: scale(1.05);
+    }
     @media (max-width: 480px) {
       body {
         padding: 2rem;
@@ -295,7 +311,7 @@
       ©2025 Aoxloty.<br/>
       Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank" class="text-cre">congtuuit</a>.
     </div>
-	<p class="text-bottom-left" ><a href="https://github.com/aoxloty/aoxloty.github.io/releases" target="blank" class="text-rls">v205.1125</a></p>
+	<p class="text-bottom-left" ><a href="https://github.com/aoxloty/aoxloty.github.io/releases" target="blank" class="text-rls">v205.1202d</a></p>
   </div>
 
 </body>
