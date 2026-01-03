@@ -2,8 +2,8 @@ backend:
   name: github
   repo: aoxloty/aoxloty.github.io
   branch: main
-  base_url: https://aoxloty.vercel.app/admin/
-  auth_endpoint: /auth
+  auth_type: implicit
+  app_id: Ov23liJ5XpampDAnIyQq
 
 media_folder: "assets/art"
 public_folder: "assets/art"
