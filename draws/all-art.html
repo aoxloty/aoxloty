@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="favicon.ico" rel="icon" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Artworks | Aoxloty Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      background-image: url('artfightlol.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      background-size: cover;
+      color: #333;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      max-width: 1000px; /* Rộng hơn để chứa được nhiều cột ảnh */
+      width: 100%;
+      text-align: center;
+    }
+    h1 { color: orange; font-size: 2.2rem; margin-bottom: 0.5rem; }
+    p { font-size: 1.1rem; margin-bottom: 1.5rem; color: #555;}
+    .back-home {
+      display: inline-block;
+      margin-bottom: 2rem;
+      text-decoration: none;
+      color: #555;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .back-home:hover { color: orange; }
+
+    /* Lưới Gallery cho toàn bộ tranh */
+    .art-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 2rem;
+    }
+    .art-item {
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: #f9f9f9;
+      transition: 0.3s;
+    }
+    .art-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: 0.4s;
+    }
+    .art-item:hover { transform: translateY(-5px); }
+    .art-item:hover img { transform: scale(1.08); }
+
+    .footer { margin-top: 2rem; font-size: 0.9rem; color: #999; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-home">← Back to Home</a>
+    <h1><b>Gallery</b></h1>
+    <p>Explore all my drawings</p>
+
+    <div class="art-gallery" id="full-gallery">
+        </div>
+
+    <div class="footer">
+      ©2026 Aoxloty.
+    </div>
+  </div>
+
+<script>
+    async function initGallery() {
+    const galleryContainer = document.getElementById('full-gallery');
+    
+    try {
+        // Lấy dữ liệu từ file JSON ở thư mục gốc
+        const response = await fetch('../data.json');
+        const data = await response.json();
+        const artData = data.artData;
+
+        if (artData && Object.keys(artData).length > 0) {
+            // Đảo ngược danh sách để tranh mới nhất lên đầu
+            Object.keys(artData).reverse().forEach(id => {
+                const art = artData[id];
+                const artItem = document.createElement('div');
+                artItem.className = 'art-item';
+                artItem.innerHTML = `
+                    <a href="../art.html?id=${id}">
+                        <img src="../${art.image}" alt="${art.title}" loading="lazy">
+                    </a>
+                `;
+                galleryContainer.appendChild(artItem);
+            });
+        } else {
+            galleryContainer.innerHTML = "<p style='grid-column: 1/-1;'>No artworks here.</p>";
+        }
+    } catch (error) {
+        console.error("Lỗi nạp tranh:", error);
+        galleryContainer.innerHTML = "<p style='grid-column: 1/-1;'>Error loading gallery.</p>";
+    }
+}
+
+// Chạy hàm khi trang tải xong
+window.onload = initGallery;
+</script>
+</body>
+</html>

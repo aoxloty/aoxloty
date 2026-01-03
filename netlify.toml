@@ -1,0 +1,27 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/language/*"
+  to = "/language/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/vn/*"
+  to = "/vn/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/*"
+  to = "/en/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/art"
+  to = "/art.html"
+  status = 200
+
+[[redirects]]
+  from = "/draws/all-art"
+  to = "/draws/all-art.html"
+  status = 200

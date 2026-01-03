@@ -1,0 +1,44 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/art"
+public_folder: "/assets/art"
+
+collections:
+  - name: "content"
+    label: "Quản lý Nội dung"
+    files:
+      - label: "Danh sách Tranh"
+        name: "arts"
+        file: "data.json"
+        fields:
+          - name: artData
+            label: "Tranh vẽ"
+            widget: "object"
+            fields:
+              # CMS sẽ hiện danh sách các tranh theo ID để bạn sửa hoặc thêm
+              - label: "Danh sách chi tiết"
+                name: "items" 
+                widget: "list"
+                summary: "{{title}}"
+                fields:
+                  - {label: "ID (Ví dụ: tranh3)", name: "id", widget: "string"}
+                  - {label: "Tiêu đề", name: "title", widget: "string"}
+                  - {label: "Ảnh", name: "image", widget: "image"}
+                  - {label: "Mô tả", name: "description", widget: "text"}
+                  - {label: "Ngày (YYYY-MM-DD)", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+                  - {label: "Link Toyhouse", name: "link", widget: "string", required: false}
+
+      - label: "Danh sách Video"
+        name: "videos"
+        file: "data.json"
+        fields:
+          - name: videoData
+            label: "Video Youtube"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - {label: "Tiêu đề", name: "title", widget: "string"}
+              - {label: "Link Embed (https://www.youtube.com/embed/...)", name: "embedUrl", widget: "string"}
+              - {label: "Mô tả", name: "description", widget: "string"}

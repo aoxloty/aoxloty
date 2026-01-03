@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Loading Art...</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #ebedee; display: flex; justify-content: center; padding: 2rem; }
+        .container { background: #fff; padding: 1.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 600px; width: 90%; text-align: center; margin: 10px auto;}
+        #art-image { width: 100%; height: auto; border-radius: 12px; margin-top: 1rem; }
+        h1 { color: orange; margin-top: 1rem;}
+        .button-home {
+            margin-top: 1rem;   
+            margin-bottom: 0rem;
+            text-decoration: none; color: #333; font-weight: bold; border: 1px solid #ccc; padding: 5px 15px; border-radius: 5px; display: inline-block; transition: 0.3s; 
+        }
+        .button-home:hover { 
+            background: #f0f0f0; 
+        }
+
+        /* CSS cho nút Link giống nút Support */
+        .btn-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-bottom: 1rem;
+        }
+        .btn-link:hover { background-color: #1d4ed8; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="button-home" href="index.html">Home</a>
+        <a class="button-home" href="draws/all-art.html">Gallery</a>
+
+        
+        <h1 id="art-title">Đang tải...</h1>
+        <p id="art-date" style="color: #888; font-size: 0.9rem; margin: 5px 0;"></p>
+        <p id="art-desc" style="margin-bottom: 1.5rem;"></p>
+
+        <div id="link-container">
+            <a id="art-link" href="#" target="_blank" class="btn-link" style="display: none;">
+                View on Toyhouse ➔
+            </a>
+        </div>
+
+        <img id="art-image" src="" alt="Art Image">
+
+        <div style="margin-top: 2rem; color: #999;">©2025 Aoxloty.</div>
+    </div>
+
+    <script>
+    async function loadArtDetail() {
+    try {
+        // 1. Lấy ID từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const artId = urlParams.get('id');
+
+        // 2. Fetch dữ liệu từ data.json
+        const response = await fetch('data.json');
+        const data = await response.json();
+        const art = data.artData[artId];
+
+        if (art) {
+            // 3. Đổ dữ liệu vào từng thẻ riêng biệt
+            document.title = `${art.title} | Aoxloty Portfolio`;
+            document.getElementById('art-title').innerText = art.title;
+            document.getElementById('art-date').innerText = art.date || '';
+            document.getElementById('art-desc').innerText = art.description || 'No description available.';
+            
+            const imgElement = document.getElementById('art-image');
+            imgElement.src = art.image;
+            imgElement.alt = art.title;
+
+            // Xử lý nút Link Toyhouse
+            const linkBtn = document.getElementById('art-link');
+            if (art.link) {
+                linkBtn.href = art.link;
+                linkBtn.style.display = 'inline-block';
+            } else {
+                linkBtn.style.display = 'none';
+            }
+        } else {
+            document.getElementById('art-title').innerText = "Lỗi: Không tìm thấy tranh";
+            document.getElementById('art-title').style.color = "red";
+        }
+    } catch (error) {
+        console.error("Lỗi nạp chi tiết tranh:", error);
+        document.getElementById('art-title').innerText = "Đã có lỗi xảy ra!";
+    }
+}
+
+loadArtDetail();
+    </script>
+</body>
+</html>
