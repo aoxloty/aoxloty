@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js"></script>
+    <meta charset="UTF-8" />
+    <title>Trang Admin</title>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
   </head>
   <body>
-    <!-- BẮT BUỘC -->
-    <div id="nc-root"></div>
+    <h1>Trang Admin</h1>
+    <button id="loginBtn">Đăng nhập với Google</button>
 
     <script>
-      if (window.CMS) {
-        CMS.init();
-      }
+      // Cấu hình Firebase
+      const firebaseConfig = {
+  apiKey: "AIzaSyALTrutr6VsBSPyv0RDVSnuZ1by8HTD_Hs",
+  authDomain: "aoxloty-ab7b3.firebaseapp.com",
+  projectId: "aoxloty-ab7b3",
+  storageBucket: "aoxloty-ab7b3.firebasestorage.app",
+  messagingSenderId: "656551781954",
+  appId: "1:656551781954:web:520ad183ddd5de7f476fdb"
+};
+
+      // Khởi tạo Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+
+      // Xử lý đăng nhập với Google
+      const loginBtn = document.getElementById("loginBtn");
+
+      loginBtn.addEventListener("click", () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            const user = result.user;
+            alert(`Xin chào ${user.displayName}`);
+            // Sau khi đăng nhập, bạn có thể chuyển hướng hoặc tải lại trang
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      });
     </script>
   </body>
 </html>
