@@ -8,35 +8,25 @@ public_folder: "assets/art"
 collections:
   - name: "content"
     label: "Quản lý Nội dung"
-    delete: false # Tránh xóa nhầm file data.json
     files:
-      - label: "Danh sách Tranh vẽ"
-        name: "arts"
+      - label: "Dữ liệu Website"
+        name: "data"
         file: "data.json"
         fields:
-          - name: artData
-            label: "Tất cả tranh"
-            widget: "object"
+          - label: "Danh sách Tranh vẽ"
+            name: "artData"
+            widget: "list"
+            summary: "{{title}}"
             fields:
-              - label: "Thêm/Sửa Tranh"
-                name: "items"
-                widget: "list"
-                allow_add: true
-                summary: "{{title}}"
-                fields:
-                  - {label: "ID (Ví dụ: tranh1)", name: "id", widget: "string"}
-                  - {label: "Tiêu đề", name: "title", widget: "string"}
-                  - {label: "Ảnh", name: "image", widget: "image"}
-                  - {label: "Mô tả", name: "description", widget: "text"}
-                  - {label: "Ngày (YYYY-MM-DD)", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
-                  - {label: "Link Toyhouse", name: "link", widget: "string", required: false}
+              - {label: "ID (ví dụ: tranh1)", name: "id", widget: "id"}
+              - {label: "Tiêu đề", name: "title", widget: "string"}
+              - {label: "Ảnh", name: "image", widget: "image"}
+              - {label: "Mô tả", name: "description", widget: "text"}
+              - {label: "Ngày", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+              - {label: "Link Toyhouse", name: "link", widget: "string", required: false}
 
-      - label: "Danh sách Video"
-        name: "videos"
-        file: "data.json"
-        fields:
-          - name: videoData
-            label: "Tất cả Video"
+          - label: "Danh sách Video"
+            name: "videoData"
             widget: "list"
             summary: "{{title}}"
             fields:
