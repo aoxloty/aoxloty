@@ -153,36 +153,50 @@
 
 
   <script>
-  async function loadHomeGallery() {
-    const galleryContainer = document.getElementById('gallery-container');
+  async function loadHomeContent() {
+    // 1. Sửa ID thành 'main-gallery' cho khớp với HTML bên trên
+    const galleryContainer = document.getElementById('main-gallery');
+    const videoFrame = document.getElementById('latest-video-frame');
+    const videoTitle = document.getElementById('latest-video-title');
+
     try {
         const response = await fetch('data.json');
         const data = await response.json();
 
-        // Xóa nội dung cũ để nạp mới
-        if (galleryContainer) galleryContainer.innerHTML = '';
+        // --- XỬ LÝ PHẦN TRANH VẼ ---
+        if (galleryContainer) {
+            galleryContainer.innerHTML = ''; 
+            if (data.artData && Array.isArray(data.artData)) {
+                // Lấy tối đa 8 tranh mới nhất
+                const latestArts = [...data.artData].reverse().slice(0, 8); 
 
-        // Kiểm tra dữ liệu artData dạng Danh sách (Array)
-        if (data.artData && Array.isArray(data.artData)) {
-            // Lấy 8 tranh mới nhất, đảo ngược để cái mới nhất lên đầu
-            const latestArts = [...data.artData].reverse().slice(0, 8); 
-
-            latestArts.forEach(art => {
-                const artItem = document.createElement('div');
-                artItem.className = 'art-item';
-                artItem.innerHTML = `
-                    <a href="art.html?id=${art.id}">
-                        <img src="${art.image}" alt="${art.title}" style="width:100%; border-radius:10px;">
-                    </a>
-                `;
-                galleryContainer.appendChild(artItem);
-            });
+                latestArts.forEach(art => {
+                    const artItem = document.createElement('div');
+                    artItem.className = 'art-item';
+                    artItem.innerHTML = `
+                        <a href="art.html?id=${art.id}">
+                            <img src="${art.image}" alt="${art.title}">
+                        </a>
+                    `;
+                    galleryContainer.appendChild(artItem);
+                });
+            }
         }
+
+        // --- XỬ LÝ PHẦN VIDEO MỚI NHẤT ---
+        if (data.videoData && Array.isArray(data.videoData) && data.videoData.length > 0) {
+            const latestVideo = data.videoData[data.videoData.length - 1]; // Lấy video cuối cùng
+            if (videoFrame) videoFrame.src = latestVideo.embedUrl;
+            if (videoTitle) videoTitle.innerText = latestVideo.title;
+        }
+
     } catch (error) {
-        console.error("Lỗi tải trang chủ:", error);
+        console.error("Lỗi tải nội dung trang chủ:", error);
     }
 }
-loadHomeGallery();
+
+// Chạy hàm khi trang tải xong
+loadHomeContent();
 
      document.oncontextmenu = function () { return false; }
 	document.onkeypress = function (event) {
