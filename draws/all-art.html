@@ -88,20 +88,19 @@
     async function loadFullGallery() {
     const galleryContainer = document.getElementById('gallery-container');
     try {
-        // Lưu ý dấu ../ vì file nằm trong thư mục draws/
         const response = await fetch('../data.json'); 
         const data = await response.json();
 
-        galleryContainer.innerHTML = '';
+        if (galleryContainer) galleryContainer.innerHTML = '';
 
         if (data.artData && Array.isArray(data.artData)) {
-            // Hiện toàn bộ tranh, cái mới nhất lên đầu
+            // Hiện toàn bộ tranh
             [...data.artData].reverse().forEach(art => {
                 const artItem = document.createElement('div');
                 artItem.className = 'art-item';
                 artItem.innerHTML = `
                     <a href="../art.html?id=${art.id}">
-                        <img src="${art.image}" alt="${art.title}">
+                        <img src="../${art.image}" alt="${art.title}" style="width:100%; border-radius:10px;">
                     </a>
                 `;
                 galleryContainer.appendChild(artItem);
