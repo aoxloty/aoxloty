@@ -48,12 +48,15 @@
     /* --- PHẦN GALLERY TRANH VẼ --- */
     .art-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 180px));
       gap: 15px;
       margin-bottom: 0.5rem;
+      justify-content: center;
     }
     .art-item img {
       width: 100%;
+      height: 180px;
+      object-fit: cover;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: 0.3s;
