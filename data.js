@@ -11,11 +11,20 @@ const artData = {
 };
 
 const videoData = [
-/*  {
+    {
         title: "My 'second' roblox animation",
         embedUrl: "https://www.youtube.com/embed/bwktbyVMkP4",
         description: "Mô tả ngắn về video 1"
     },
-*/
+    {
+        title: "My 'second' roblox animation",
+        embedUrl: "https://www.youtube.com/embed/bwktbyVMkP4",
+        description: "Mô tả ngắn về video 1"
+    },
+    {
+        title: "My 'second' roblox animation",
+        embedUrl: "https://www.youtube.com/embed/bwktbyVMkP4",
+        description: "Mô tả ngắn về video 1"
+    }
     
 ];

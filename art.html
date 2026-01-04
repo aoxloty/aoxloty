@@ -18,7 +18,6 @@
             background: #f0f0f0; 
         }
 
-        /* CSS cho nút Link giống nút Support */
         .btn-link {
             display: inline-block;
             padding: 10px 25px;
@@ -51,7 +50,7 @@
 
         <img id="art-image" src="" alt="Art Image">
 
-        <div style="margin-top: 2rem; color: #999;">©2025 Aoxloty.</div>
+        <div style="margin-top: 2rem; color: #999;">©2026 Aoxloty.</div>
     </div>
 
     <script>
@@ -69,7 +68,7 @@
         const response = await fetch('data.json');
         const data = await response.json();
         
-        // Tìm đúng tranh có ID khớp với URL
+        
         const art = data.artData.find(item => item.id === artId);
 
         if (art) {

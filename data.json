@@ -1,65 +1,13 @@
 {
   "artData": [
     {
-      "image": "assets/art/image_261.png",
-      "id": "yellow-axolotl-1",
-      "title": "First look of Yellow (M)",
-      "description": "First look of Yellow (M)",
-      "date": "2022-07-11"
-    },
-    {
-      "image": "assets/art/image_262.png",
-      "id": "2023-yellow",
-      "title": "Yellow in 2023",
-      "description": "Look silly right?",
-      "date": "2023-04-23"
-    },
-    {
-      "image": "assets/art/image_265_5.png",
-      "id": "kina-1",
-      "title": "She kinda tired",
-      "description": "Always need some coffee.",
-      "date": "2024-02-17"
-    },
-    {
-      "id": "lny-2024",
-      "title": "Lunar New Year 2024!",
-      "image": "assets/art/image_266.png",
-      "description": "happy new year! :>",
-      "date": "2024-02-10"
-    },
-    {
-      "id": "lemon1",
-      "title": "Lemon trend lol",
-      "image": "assets/art/image_269.png",
-      "description": "lol lemon",
-      "date": "2024-05-22"
-    },
-    {
-      "id": "a-girl",
-      "title": "Found her on Pin so I drew",
-      "image": "assets/art/image_274-1-1-1-1-1-1-.png",
-      "description": "She is cute hehe",
-      "date": "2025-01-16"
-    },
-    {
-      "id": "sowwy",
-      "title": "Twisted Shelly",
-      "image": "assets/art/image_277.png",
-      "description": "oh nooo he got chased!",
-      "date": "2025-02-18"
+      "id": "tranh1",
+      "title": "Art 1",
+      "image": "assets/art/artfightlol.png",
+      "description": "Mô tả của bạn",
+      "date": "2025-12-08",
+      "link": ""
     }
   ],
-  "videoData": [
-    {
-      "title": "My first Roblox animation",
-      "embedUrl": "https://www.youtube.com/embed/Smp2qxFLxso",
-      "description": "yeah it's my first"
-    },
-    {
-      "title": "My \"second\" Roblox animation",
-      "embedUrl": "https://www.youtube.com/embed/bwktbyVMkP4",
-      "description": "yeah it's not my second"
-    }
-  ]
+  "videoData": []
 }

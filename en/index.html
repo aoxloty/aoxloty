@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link href="favicon.ico" rel="icon" type="image/x-icon">
   <meta charset="UTF-8" />
@@ -8,20 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #fdfbfb, #ebedee);
-	  background-image:url('artfightlol.png');
-	  background-repeat: no-repeat;
-	  background-position: center;
-	  background-attachment: fixed;
+      background-image: url('artfightlol.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
       background-size: cover;
       color: #333;
       padding: 2rem;
@@ -30,8 +32,9 @@
       align-items: center;
       min-height: 100vh;
     }
+
     .container {
-	  position: relative;
+      position: relative;
       background: #fff;
       padding: 2.5rem;
       border-radius: 20px;
@@ -41,20 +44,31 @@
       text-align: center;
       animation: fadeIn 0.5s ease-in-out;
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     h1 {
       color: #1c5ee3;
       font-size: 2.2rem;
       margin-bottom: 0.5rem;
     }
+
     p {
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
       color: #555;
     }
+
     img.qr {
       width: 260px;
       max-width: 100%;
@@ -62,37 +76,47 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 10);
       margin-bottom: 1.5rem;
     }
-	.axolotl-wrapper {
+
+    .axolotl-wrapper {
       display: flex;
-      justify-content: center; 
-      margin-top: 1rem; 
-      margin-bottom: 1.5rem; }
+      justify-content: center;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
     }
-	.axolotl-img {
-      display: block; 
-   	  image-rendering: pixelated;
-	  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
     }
-	.axolotl-img:hover {
-        transform: scale(1.05);
+
+    .axolotl-img {
+      display: block;
+      image-rendering: pixelated;
+      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
     }
+
+    .axolotl-img:hover {
+      transform: scale(1.05);
+    }
+
     .footer {
       margin-top: 1rem;
       font-size: 0.9rem;
       color: #999;
     }
-	.wplace-link:link {
+
+    .wplace-link:link {
       color: white;
-	}
+    }
+
     .wplace-link:visited {
       color: white;
-	}
+    }
+
     .wplace-link:hover {
-	  color: white;
-	}
+      color: white;
+    }
+
     .wplace-link:active {
       color: white;
-	}
+    }
+
     .badge {
       display: inline-block;
       background: #1c5ee3;
@@ -100,55 +124,66 @@
       font-size: 1rem;
       padding: 6px 14px;
       border-radius: 30px;
-	  margin-top:0.1rem;
-	  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+      margin-top: 0.1rem;
+      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
     }
-	.badge:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 10px rgba(28, 94, 227, 0.5);
+
+    .badge:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(28, 94, 227, 0.5);
     }
-	.button-bottom-right {
-	  position: absolute;
+
+    .button-bottom-right {
+      position: absolute;
       bottom: -50px;
-	  right: 20px;
-	  border: none;
-  	  padding: 12px 8px;
-	  text-align: center;
-	  text-decoration: none;
-	  display: inline-block;
-	  font-size: 16px;
-	  cursor: pointer;
-	  .button-left {
-	    right: auto; 
-	    left: 2.5rem;
-	   }
-	  width: 60px;
+      right: 20px;
+      border: none;
+      padding: 12px 8px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+
+      .button-left {
+        right: auto;
+        left: 2.5rem;
+      }
+
+      width: 60px;
       height: 45px;
       border: 1px;
       border-radius: 5px;
-	  font-size: 17px;
-	}
-	.button-bottom-right:hover {
-	   background-color: red;
-       color: yellow;
-	}
-	.button-bottom-right:before {
-	   font-family: fontAwesome;
-       content: "\f0da\00a0";
-	}
-	.button-bottom-right:link {
+      font-size: 17px;
+    }
+
+    .button-bottom-right:hover {
+      background-color: red;
+      color: yellow;
+    }
+
+    .button-bottom-right:before {
+      font-family: fontAwesome;
+      content: "\f0da\00a0";
+    }
+
+    .button-bottom-right:link {
       color: white;
-	}
+    }
+
     .button-bottom-right:visited {
       color: white;
-	}
+    }
+
     .button-bottom-right:hover {
-	  color: white;
-	}
+      color: white;
+    }
+
     .button-bottom-right:active {
       color: white;
-	}
-	.button {
+    }
+
+    .button {
       position: absolute;
       top: 2.5rem;
       right: 2.5rem;
@@ -160,24 +195,35 @@
       font-size: 25px;
       cursor: pointer;
     }
-    .button1 {width: 50px; height: 50px; border: 1px; border-radius: 5px;}
+
+    .button1 {
+      width: 50px;
+      height: 50px;
+      border: 1px;
+      border-radius: 5px;
+    }
+
     .button1:hover {
       background-color: red;
       color: yellow;
     }
+
     .button1:before {
       font-family: fontAwesome;
       content: "\f0ac\00a0";
     }
+
     .button1.button-left:before {
-      content: "\f015\00a0"; 
+      content: "\f015\00a0";
     }
+
     .button1.button-left:hover {
-	  background-color: Purple;
+      background-color: Purple;
       color: white;
-	}
-	.button-left {
-	  position: absolute;
+    }
+
+    .button-left {
+      position: absolute;
       top: 2.5rem;
       left: 2.5rem;
       border: none;
@@ -188,129 +234,151 @@
       font-size: 17px;
       cursor: pointer;
       width: 100px;
-	}
-	.text-bottom-left {
+    }
+
+    .text-bottom-left {
       position: absolute;
       bottom: -60px;
       left: 20px;
-      font-size: 16px; 
-      color: #333; 
-      padding: 0 5px; 
-      white-space: nowrap;
-      background-color: #fff; 
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-    }
-	.text-rls:link {
+      font-size: 16px;
       color: #333;
-	  text-decoration: none;
-	}
+      padding: 0 5px;
+      white-space: nowrap;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-rls:link {
+      color: #333;
+      text-decoration: none;
+    }
+
     .text-rls:visited {
       color: #333;
-	  text-decoration: none;
-	}
+      text-decoration: none;
+    }
+
     .text-rls:hover {
-	  color: #333;
-	  text-decoration: none;
-	}
+      color: #333;
+      text-decoration: none;
+    }
+
     .text-rls:active {
       color: #333;
-	  text-decoration: none;
-	}
-	.text-cre:link {
-	  text-decoration: none;
-	}
-    .text-cre:visited {
-	  text-decoration: none;
-	}
-    .text-cre:hover {
-	  text-decoration: none;
-	}
-    .text-cre:active {
-	  text-decoration: none;
-	}
-	img[src*="buymeacoffee"] {
-	  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-	}
-	img[src*="buymeacoffee"]:hover {
-        transform: scale(1.05);
+      text-decoration: none;
     }
+
+    .text-cre:link {
+      text-decoration: none;
+    }
+
+    .text-cre:visited {
+      text-decoration: none;
+    }
+
+    .text-cre:hover {
+      text-decoration: none;
+    }
+
+    .text-cre:active {
+      text-decoration: none;
+    }
+
+    img[src*="buymeacoffee"] {
+      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    }
+
+    img[src*="buymeacoffee"]:hover {
+      transform: scale(1.05);
+    }
+
     @media (max-width: 480px) {
       body {
         padding: 2rem;
       }
+
       .container {
         padding: 2rem;
       }
-	  .button1 {
-	    top: 1.5rem;
-		right: 1.5rem;
-	  }
-	  .button-left {
+
+      .button1 {
+        top: 1.5rem;
+        right: 1.5rem;
+      }
+
+      .button-left {
         left: 1.5rem;
-		width: 80px;
-	  }
-	  .button-bottom-right {
-	    bottom: -50px;
+        width: 80px;
+      }
+
+      .button-bottom-right {
+        bottom: -50px;
         right: 20px;
-	  }
-	  .text-bottom-left {
-	    bottom: -50px;
-        left: -27px;
-	  }
+      }
+
+      .text-bottom-left {
+        bottom: -50px;
+        left: -27px;
+      }
     }
   </style>
 </head>
 <script>
-    document.oncontextmenu = function () { return false; }
-	document.onkeypress = function (event) {
-	event = (event || window.event);
-	   if (event.keyCode == 123) {
-	   return false;
-	}
-	}
-	document.onmousedown = function (event) {
-	event = (event || window.event);
-	   if (event.keyCode == 123) {
-	   return false;
-	}
-	}
-	document.onkeydown = function (event) {
-	event = (event || window.event);
-	   if (event.keyCode == 123) {
-	   return false;
-	}
-	}
-	document.addEventListener("keydown", function (event){
-	   if (event.ctrlKey){
-	 	  event.preventDefault();
-		 }
-	   if(event.keyCode == 123){
-		  event.preventDefault();
-		 }
-	})  
-</script> 
+  document.oncontextmenu = function () { return false; }
+  document.onkeypress = function (event) {
+    event = (event || window.event);
+    if (event.keyCode == 123) {
+      return false;
+    }
+  }
+  document.onmousedown = function (event) {
+    event = (event || window.event);
+    if (event.keyCode == 123) {
+      return false;
+    }
+  }
+  document.onkeydown = function (event) {
+    event = (event || window.event);
+    if (event.keyCode == 123) {
+      return false;
+    }
+  }
+  document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey) {
+      event.preventDefault();
+    }
+    if (event.keyCode == 123) {
+      event.preventDefault();
+    }
+  })  
+</script>
+
 <body onmousedown="return false" onselectstart="return false">
 
   <div class="container">
-    <a class="button button1" href="/language/" ><b></b></a>
-	<a class="button1 button-left" href="/" ><b>Home</b></a>
-	<a class="button-bottom-right" href="../earlytest/test.html" ><b>Test</b></a>
-	<div style="height: 3rem;"></div>
-	<h1><b>Aoxloty</b></h1>
-	<p>For international payment!</p>
-    <a target="blank" href="https://www.buymeacoffee.com/aoxloty"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=aoxloty&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
-	<div style="height: 0rem;"></div>
-	<div class="axolotl-wrapper">
-	<img class="axolotl-img" src="../vn/fun.png" alt="Yellow Axolotl F">
+    <a class="button button1" href="/language/"><b></b></a>
+    <a class="button1 button-left" href="/"><b>Home</b></a>
+    <a class="button-bottom-right" href="../earlytest/test.html"><b>Test</b></a>
+    <div style="height: 3rem;"></div>
+    <h1><b>Aoxloty</b></h1>
+    <p>For international payment!</p>
+    <a target="blank" href="https://www.buymeacoffee.com/aoxloty"><img
+        src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=aoxloty&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
+    <div style="height: 0rem;"></div>
+    <div class="axolotl-wrapper">
+      <img class="axolotl-img" src="../vn/fun.png" alt="Yellow Axolotl F">
     </div>
-	<div class="badge">Had been on <a href="https://wplace.samuelscheit.com/#z=15.00&lat=21.11746&lng=105.79732&time=2025-08-09T20-01-14.231Z&zoom=15.00" target="blank" class="wplace-link"><b>WPlace</b></a>!</div>
+    <div class="badge">Had been on <a
+        href="https://wplace.samuelscheit.com/#z=15.00&lat=21.11746&lng=105.79732&time=2025-08-09T20-01-14.231Z&zoom=15.00"
+        target="blank" class="wplace-link"><b>WPlace</b></a>!</div>
     <div class="footer">
-      Thank you so much💛<br/>
-      ©2025 Aoxloty.<br/>
+      Thank you so much💛<br />
+      ©2026 Aoxloty.<br />
     </div>
-	<p class="text-bottom-left" >v206.0103a</p>
+    <p class="text-bottom-left">v206.0103a</p>
   </div>
 
 </body>
+
 </html>

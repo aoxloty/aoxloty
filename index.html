@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link href="favicon.ico" rel="icon" type="image/x-icon">
   <meta charset="UTF-8" />
@@ -8,14 +9,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    /* Giữ nguyên CSS gốc của bạn */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #fdfbfb, #ebedee);
-      background-image:url('artfightlol.png'); /* Hoặc ảnh nền khác của bạn */
+      background-image: url('artfightlol.png');
+
       background-repeat: no-repeat;
       background-position: center;
       background-attachment: fixed;
@@ -27,25 +33,82 @@
       align-items: center;
       min-height: 100vh;
     }
+
     .container {
       position: relative;
       background: #fff;
       padding: 2.5rem;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      max-width: 800px; /* Tăng độ rộng để hiện Gallery đẹp hơn */
+      max-width: 800px;
+
       width: 100%;
       text-align: center;
       animation: fadeIn 0.5s ease-in-out;
     }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    
-    h1 { color: orange; font-size: 2.2rem; margin-bottom: 0.5rem; }
-    h2 { color: rgb(41, 41, 41); margin-top: 0.5rem; margin-bottom: 1rem; }
-    p { font-size: 1.1rem; margin-bottom: 1.5rem; color: #555; }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      color: orange;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      color: rgb(41, 41, 41);
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 30px;
+
+      text-align: left;
+
+      margin-bottom: 2rem;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      text-align: center;
+
+      flex: 1;
+    }
+
+    .profile-info p {
+      font: 'Inter', sans-serif;
+      color: #000000;
+      font-size: 20px;
+      margin-bottom: 0.5rem;
+    }
 
 
-    /* --- PHẦN GALLERY TRANH VẼ --- */
+
     .art-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 180px));
@@ -53,40 +116,65 @@
       margin-bottom: 0.5rem;
       justify-content: center;
     }
+
     .art-item img {
       width: 100%;
       height: 180px;
       object-fit: cover;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       transition: 0.3s;
       cursor: pointer;
     }
-    .art-item img:hover { transform: scale(1.05); }
 
-    /* --- PHẦN VIDEO YOUTUBE --- */
+    .art-item img:hover {
+      transform: scale(1.05);
+    }
+
     .video-wrapper {
       position: relative;
-      padding-bottom: 56.25%; /* Tỷ lệ 16:9 */
+      padding-bottom: 56.25%;
       height: 0;
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .video-wrapper iframe {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* --- CÁC NÚT BẤM (Giữ nguyên Style của bạn) --- */
-    .button-lang {
-      position: absolute; top: 1.0rem; right: 1.0rem;
-      width: 50px; height: 50px; background: #eee; border-radius: 5px;
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none; font-size: 25px; color: #333; transition: 0.3s;
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
-    .button-lang:hover { background: red; color: yellow; }
-    .button-lang:before { font-family: fontAwesome; content: "\f0f4"; }
+
+    .button-lang {
+      position: absolute;
+      top: 1.0rem;
+      right: 1.0rem;
+      width: 50px;
+      height: 50px;
+      background: #eee;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 25px;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    .button-lang:hover {
+      background: red;
+      color: yellow;
+    }
+
+    .button-lang:before {
+      font-family: fontAwesome;
+      content: "\f0f4";
+    }
 
     .btn-support {
       display: inline-block;
@@ -99,7 +187,11 @@
       font-weight: bold;
       transition: 0.3s;
     }
-    .btn-support:hover { transform: scale(1.05); background: #144cb8; }
+
+    .btn-support:hover {
+      transform: scale(1.05);
+      background: #144cb8;
+    }
 
     .btn-others {
       display: inline-block;
@@ -112,43 +204,170 @@
       font-weight: bold;
       transition: 0.3s;
     }
-    .btn-others:hover { transform: scale(1.05); background: #550909; }
 
-    .footer { margin-top: 1rem; font-size: 0.9rem; color: #999; }
-    .text-cre { text-decoration: none; color: inherit; }
+    .btn-others:hover {
+      transform: scale(1.05);
+      background: #550909;
+    }
+
+    .footer {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    .text-cre {
+      text-decoration: none;
+      color: inherit;
+    }
+
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+
+      justify-content: center;
+    }
+
+
+    .custom-icon-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+
+      height: 48px;
+    }
+
+    .custom-icon-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      object-fit: contain;
+    }
+
+
+    .icon-normal {
+      opacity: 1;
+      z-index: 2;
+    }
+
+
+    .icon-hover {
+      opacity: 0;
+      z-index: 1;
+    }
+
+
+    .custom-icon-wrapper:hover .icon-normal {
+      opacity: 0;
+
+    }
+
+    .custom-icon-wrapper:hover .icon-hover {
+      opacity: 1;
+
+      transform: scale(1.15) rotate(5deg);
+
+    }
+
+    @media (max-width: 600px) {
+      .custom-icon-wrapper {
+        width: 40px;
+
+        height: 40px;
+      }
+
+
+      .social-links {
+        gap: 12px;
+        margin-top: 15px;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    .profile-header img {
+      margin-bottom: 0 !important;
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <a class="button-lang" title="Donate Page" href="/language"></a>
+    <a class="button-lang" title="Support me" href="/language"></a>
 
     <div style="height: 1rem;"></div>
     <h1><b>Aoxloty's Portfolio</b></h1>
-    <p>Self-taught artist/animator.</p>
+    <div class="profile-header">
+      <img src="Untitled-1.png" alt="Aoxloty"
+        style="width:177px; height:170px; border-radius: 30%; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+
+      <div class="profile-info">
+
+        <p style="margin-bottom: 0.5rem;"></p>
+        <p style="margin-bottom: 0;">Hello, I'm Aoxloty! An artist and animator.</p>
+        <p>I like creating digital art and animations.</p>
+        <p>Welcome to my portfolio where I showcase my latest drawings and video works. Feel free to explore!</p>
+        <div class="social-links">
+          <a href="https://www.youtube.com/@aoxloty" class="custom-icon-wrapper" title="Youtube" target="_blank">
+            <img src="social-svg/youtube-gray.png" class="icon-normal" alt="Youtube">
+            <img src="social-svg/youtube.png" class="icon-hover" alt="Youtube">
+          </a>
+
+          <a href="https://bsky.app/profile/aoxloty.bsky.social" class="custom-icon-wrapper" title="Bluesky" target="_blank">
+            <img src="social-svg/bluesky-gray.png" class="icon-normal" alt="Bluesky">
+            <img src="social-svg/bluesky.png" class="icon-hover" alt="Bluesky">
+          </a>
+
+          <a href="https://discord.gg/aFyydgZGyt" class="custom-icon-wrapper" title="Discord" target="_blank">
+            <img src="social-svg/discord-gray.png" class="icon-normal" alt="Discord">
+            <img src="social-svg/discord.png" class="icon-hover" alt="Discord">
+          </a>
+
+          <a href="https://www.roblox.com/users/3589247121/profile" class="custom-icon-wrapper" title="Roblox" target="_blank">
+            <img src="social-svg/roblox-gray.png" class="icon-normal" alt="Roblox">
+            <img src="social-svg/roblox.png" class="icon-hover" alt="Roblox">
+          </a>
+
+          <a href="https://steamcommunity.com/id/aoxloty" class="custom-icon-wrapper" title="Steam" target="_blank">
+            <img src="social-svg/steam-gray.png" class="icon-normal" alt="Steam">
+            <img src="social-svg/steam.png" class="icon-hover" alt="Steam">
+          </a>
+
+          <a href="https://toyhou.se/aoxloty" class="custom-icon-wrapper" title="Toyhouse" target="_blank">
+            <img src="social-svg/toyhouse-gray.png" class="icon-normal" alt="Toyhouse">
+            <img src="social-svg/toyhouse.png" class="icon-hover" alt="Toyhouse">
+          </a>
+        </div>
+      </div>
+    </div>
+
     <h2><b>Latest Drawings</b></h2>
-
-
-
-
-   
     <div class="art-gallery" id="main-gallery"></div>
 
     <a href="/draws/all-art.html" class="btn-others">Show more</a>
 
     <h2><b>Latest Work</b></h2>
-    
+
     <div class="video-wrapper">
-    <iframe id="latest-video-frame" src="" frameborder="0" allowfullscreen></iframe>
+      <iframe id="latest-video-frame" src="" frameborder="0" allowfullscreen></iframe>
     </div>
     <h3 id="latest-video-title" style="margin-top: 10px; font-size: 1.1rem; color: #333;"></h3>
     <a href="/video/all-video.html" class="btn-others">Show more</a>
-    <br/><br/>
+    <br /><br />
     <a href="/language/index.html" class="btn-support">Support My Work 💛</a>
 
     <div class="footer">
-      ©2026 Aoxloty.<br/>
-      Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank" class="text-cre">congtuuit</a>.
+      ©2026 Aoxloty.<br />
+      Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank"
+        class="text-cre"><u>congtuuit</u></a>.
     </div>
   </div>
 
@@ -156,78 +375,73 @@
 
 
   <script>
-  async function loadHomeContent() {
-    // 1. Sửa ID thành 'main-gallery' cho khớp với HTML bên trên
-    const galleryContainer = document.getElementById('main-gallery');
-    const videoFrame = document.getElementById('latest-video-frame');
-    const videoTitle = document.getElementById('latest-video-title');
+    async function loadHomeContent() {
+      const galleryContainer = document.getElementById('main-gallery');
+      const videoFrame = document.getElementById('latest-video-frame');
+      const videoTitle = document.getElementById('latest-video-title');
 
-    try {
+      try {
         const response = await fetch('data.json');
         const data = await response.json();
 
-        // --- XỬ LÝ PHẦN TRANH VẼ ---
         if (galleryContainer) {
-            galleryContainer.innerHTML = ''; 
-            if (data.artData && Array.isArray(data.artData)) {
-                // Lấy tối đa 8 tranh mới nhất
-                const latestArts = [...data.artData].reverse().slice(0, 3); 
+          galleryContainer.innerHTML = '';
+          if (data.artData && Array.isArray(data.artData)) {
+            const latestArts = [...data.artData].reverse().slice(0, 3);
 
-                latestArts.forEach(art => {
-                    const artItem = document.createElement('div');
-                    artItem.className = 'art-item';
-                    artItem.innerHTML = `
+            latestArts.forEach(art => {
+              const artItem = document.createElement('div');
+              artItem.className = 'art-item';
+              artItem.innerHTML = `
                         <a href="art.html?id=${art.id}">
                             <img src="${art.image}" alt="${art.title}">
                         </a>
                     `;
-                    galleryContainer.appendChild(artItem);
-                });
-            }
+              galleryContainer.appendChild(artItem);
+            });
+          }
         }
 
-        // --- XỬ LÝ PHẦN VIDEO MỚI NHẤT ---
         if (data.videoData && Array.isArray(data.videoData) && data.videoData.length > 0) {
-            const latestVideo = data.videoData[data.videoData.length - 1]; // Lấy video cuối cùng
-            if (videoFrame) videoFrame.src = latestVideo.embedUrl;
-            if (videoTitle) videoTitle.innerText = latestVideo.title;
+          if (videoFrame) videoFrame.src = latestVideo.embedUrl;
+          if (videoTitle) videoTitle.innerText = latestVideo.title;
         }
 
-    } catch (error) {
+      } catch (error) {
         console.error("Lỗi tải nội dung trang chủ:", error);
+      }
     }
-}
 
-// Chạy hàm khi trang tải xong
-loadHomeContent();
+    loadHomeContent();
 
-     document.oncontextmenu = function () { return false; }
-	document.onkeypress = function (event) {
-	event = (event || window.event);
-	    if (event.keyCode == 123) {
-	    return false;
-	}
-	}
-	document.onmousedown = function (event) {
-	event = (event || window.event);
-	    if (event.keyCode == 123) {
-	    return false;
-	}
-	}
-	document.onkeydown = function (event) {
-	event = (event || window.event);
-	    if (event.keyCode == 123) {
-	    return false;
-	}
-	}
-	document.addEventListener("keydown", function (event){
-	    if (event.ctrlKey){
-	 	   event.preventDefault();
-		  }
-	    if(event.keyCode == 123){
-		   event.preventDefault();
-		  }
-	})
+    document.oncontextmenu = function () { return false; }
+    document.onkeypress = function (event) {
+      event = (event || window.event);
+      if (event.keyCode == 123) {
+        return false;
+      }
+    }
+    document.onmousedown = function (event) {
+      event = (event || window.event);
+      if (event.keyCode == 123) {
+        return false;
+      }
+    }
+    document.onkeydown = function (event) {
+      event = (event || window.event);
+      if (event.keyCode == 123) {
+        return false;
+      }
+    }
+    document.addEventListener("keydown", function (event) {
+      if (event.ctrlKey) {
+        event.preventDefault();
+      }
+      if (event.keyCode == 123) {
+        event.preventDefault();
+      }
+    })
   </script>
 </body>
+
 </html>

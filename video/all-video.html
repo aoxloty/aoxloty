@@ -22,7 +22,7 @@
       }
       .back-home:hover { color: orange; }
         
-        /* Grid hiển thị video */
+        
         .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .video-card { background: #f9f9f9; padding: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .video-card iframe { width: 100%; height: 200px; border-radius: 10px; border: none; }
@@ -54,8 +54,6 @@
 
         if (videoData && videoData.length > 0) {
             container.innerHTML = ""; 
-
-            // Đảo ngược danh sách (Video mới nhất lên đầu)
             const reversedVideos = [...videoData].reverse(); 
 
             reversedVideos.forEach(video => {

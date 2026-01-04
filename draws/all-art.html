@@ -27,7 +27,7 @@
       padding: 2.5rem;
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      max-width: 1000px; /* Rộng hơn để chứa được nhiều cột ảnh */
+      max-width: 1000px; 
       width: 100%;
       text-align: center;
     }
@@ -43,7 +43,7 @@
     }
     .back-home:hover { color: orange; }
 
-    /* Lưới Gallery cho toàn bộ tranh */
+    
     .art-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -86,7 +86,6 @@
 
 <script>
     async function loadFullGallery() {
-        // Đã đổi lại thành 'full-gallery' để khớp với HTML bên trên
         const galleryContainer = document.getElementById('full-gallery');
         try {
             const response = await fetch('../data.json'); 
@@ -95,13 +94,9 @@
             if (galleryContainer) galleryContainer.innerHTML = '';
 
             if (data.artData && Array.isArray(data.artData)) {
-                // Đảo ngược danh sách để tranh mới nhất lên đầu
                 [...data.artData].reverse().forEach(art => {
                     const artItem = document.createElement('div');
                     artItem.className = 'art-item';
-                    
-                    // Xử lý đường dẫn ảnh: Nếu trong data.json là "assets/art/..." 
-                    // thì cần thêm "../" vì file này nằm trong thư mục con
                     const imagePath = art.image.startsWith('http') ? art.image : `../${art.image}`;
                     
                     artItem.innerHTML = `
