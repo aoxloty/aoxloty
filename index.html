@@ -139,7 +139,11 @@
       overflow: hidden;
       margin-bottom: 1rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: #f0f0f0;
+      border: 5px solid #fff;
+      outline: 1px solid #ddd;
     }
+
 
     .video-wrapper iframe {
       position: absolute;
@@ -321,7 +325,8 @@
             <img src="social-svg/youtube.png" class="icon-hover" alt="Youtube">
           </a>
 
-          <a href="https://bsky.app/profile/aoxloty.bsky.social" class="custom-icon-wrapper" title="Bluesky" target="_blank">
+          <a href="https://bsky.app/profile/aoxloty.bsky.social" class="custom-icon-wrapper" title="Bluesky"
+            target="_blank">
             <img src="social-svg/bluesky-gray.png" class="icon-normal" alt="Bluesky">
             <img src="social-svg/bluesky.png" class="icon-hover" alt="Bluesky">
           </a>
@@ -331,7 +336,8 @@
             <img src="social-svg/discord.png" class="icon-hover" alt="Discord">
           </a>
 
-          <a href="https://www.roblox.com/users/3589247121/profile" class="custom-icon-wrapper" title="Roblox" target="_blank">
+          <a href="https://www.roblox.com/users/3589247121/profile" class="custom-icon-wrapper" title="Roblox"
+            target="_blank">
             <img src="social-svg/roblox-gray.png" class="icon-normal" alt="Roblox">
             <img src="social-svg/roblox.png" class="icon-hover" alt="Roblox">
           </a>
@@ -384,31 +390,37 @@
         const response = await fetch('data.json');
         const data = await response.json();
 
-        if (galleryContainer) {
+        if (galleryContainer && data.artData) {
           galleryContainer.innerHTML = '';
-          if (data.artData && Array.isArray(data.artData)) {
-            const latestArts = [...data.artData].reverse().slice(0, 3);
+          const latestArts = [...data.artData].reverse().slice(0, 3);
 
-            latestArts.forEach(art => {
-              const artItem = document.createElement('div');
-              artItem.className = 'art-item';
-              artItem.innerHTML = `
-                        <a href="art.html?id=${art.id}">
-                            <img src="${art.image}" alt="${art.title}">
-                        </a>
-                    `;
-              galleryContainer.appendChild(artItem);
-            });
-          }
+          latestArts.forEach(art => {
+            const artItem = document.createElement('div');
+            artItem.className = 'art-item';
+            artItem.innerHTML = `
+          <a href="art.html?id=${art.id}">
+            <img src="${art.image}" alt="${art.title}">
+          </a>
+        `;
+            galleryContainer.appendChild(artItem);
+          });
         }
 
-        if (data.videoData && Array.isArray(data.videoData) && data.videoData.length > 0) {
-          if (videoFrame) videoFrame.src = latestVideo.embedUrl;
-          if (videoTitle) videoTitle.innerText = latestVideo.title;
+        if (data.videoData && data.videoData.length > 0) {
+          const latestVideo = data.videoData[data.videoData.length - 1];
+
+          if (videoFrame) {
+            videoFrame.src = latestVideo.embedUrl;
+          }
+          if (videoTitle) {
+            videoTitle.innerText = latestVideo.title;
+          }
+        } else {
+          if (videoTitle) videoTitle.innerText = "No video available yet!";
         }
 
       } catch (error) {
-        console.error("Lỗi tải nội dung trang chủ:", error);
+        console.error("Lỗi tải nội dung:", error);
       }
     }
 
