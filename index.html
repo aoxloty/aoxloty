@@ -446,6 +446,14 @@
 
 
     @media (max-width: 600px) {
+      .container {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Ép tất cả con (h2, card, links) vào giữa */
+      }
+
       .social-links {
         display: flex;
         flex-wrap: wrap;
@@ -479,22 +487,36 @@
       }
 
       .discord-card {
-        min-width: 280px;
-        /* Thu hẹp chiều ngang tối thiểu */
-        padding: 10px 12px;
-        /* Giảm khoảng cách đệm bên trong */
-        gap: 10px;
-        /* Thu hẹp khoảng cách giữa avatar và text */
-        transform: scale(0.9);
-        /* Thu nhỏ toàn bộ card đi 10% */
-        margin: 10px auto;
-        /* Giảm khoảng cách bên ngoài */
+        display: flex;
+        align-items: center;
+        background: #111214;
+        padding: 15px 20px;
+        border-radius: 12px;
+        width: fit-content;
+        /* Card ôm vừa nội dung */
+        min-width: 300px;
+        color: white;
+
+        /* ĐÂY LÀ DÒNG QUAN TRỌNG NHẤT */
+        margin: 20px auto;
+        /* 20px là khoảng cách trên dưới, auto sẽ tự căn giữa trái phải */
+
+        position: relative;
+        /* Để cái nút "Profile" ở góc bám đúng vị trí */
+      }
+
+      .video-wrapper,
+      h1,
+      h2,
+      h3,
+      .art-gallery {
+        width: 100%;
+        /* Ép các thành phần này rộng hết cỡ, không bị bóp thành đường kẻ */
       }
 
       .avatar-container {
-        width: 60px;
-        /* Thu nhỏ avatar */
-        height: 60px;
+        width: 65px;
+        height: 65px;
         margin-left: -5px;
       }
 
