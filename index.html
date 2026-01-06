@@ -21,7 +21,7 @@
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #fdfbfb, #ebedee);
       background-image: url('artfightlol.png');
-
+      transition: background 0.3s ease, color 0.3s ease;
       background-repeat: no-repeat;
       background-position: center;
       background-attachment: fixed;
@@ -436,7 +436,6 @@
     #decoration {
       position: absolute;
       top: -11%;
-      /* Căn chỉnh để bao quanh avatar */
       left: -11%;
       width: 122%;
       height: 122%;
@@ -466,32 +465,41 @@
       margin-top: 5px;
     }
 
-    #backToTop {
-      opacity: 0;
-      visibility: hidden;
 
+    #backToTop,
+    .dark-mode-toggle {
       position: fixed;
-      bottom: 30px;
       right: 30px;
       z-index: 99;
       width: 50px;
-      /* Chiều rộng cố định */
       height: 50px;
-      /* Chiều cao cố định */
       border: none;
-      background-color: #2563eb;
-      /* Màu xanh hiện đại */
-      color: white;
       border-radius: 50%;
-      /* Hình tròn tuyệt đối */
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      /* Đổ bóng nhẹ */
       cursor: pointer;
-      transition: opacity 0.5s ease, visibility 0.5s;
       display: flex;
-      /* Để icon luôn ở giữa */
       align-items: center;
       justify-content: center;
+      transition: all 0.3s ease;
+      /* Hiệu ứng chuyển động mượt mà */
+    }
+
+    #backToTop i,
+    .dark-mode-toggle i {
+      font-size: 24px;
+    }
+
+
+
+
+
+
+    #backToTop {
+      opacity: 0;
+      visibility: hidden;
+      bottom: 30px;
+      background-color: #2563eb;
+      color: white;
     }
 
     #backToTop:hover {
@@ -508,6 +516,81 @@
     #backToTop.show {
       opacity: 1;
       visibility: visible;
+    }
+
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 90px;
+      /* Nằm trên nút Back to Top (30px + 50px + 10px khoảng cách) */
+      right: 30px;
+      /* Cùng phía bên phải */
+      z-index: 99;
+      width: 50px;
+      height: 50px;
+      border: none;
+      background-color: #fff;
+      color: #333;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .dark-mode-toggle i {
+      font-size: 20px;
+      /* Tăng kích thước này để hình to ra (mặc định thường là 16-20px) */
+    }
+
+    /* Hiệu ứng khi di chuột */
+    .dark-mode-toggle:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Khi ở chế độ tối */
+    body.dark-mode .dark-mode-toggle {
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* Các thành phần khác khi ở Dark Mode */
+    body.dark-mode {
+      background: #121212;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .container {
+      background: #1e1e1e;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    body.dark-mode h2,
+    body.dark-mode h3 {
+      color: #ffffff;
+    }
+
+    body.dark-mode p,
+    body.dark-mode .profile-info p {
+      color: #b0b0b0;
+    }
+
+
+    .dark-mode-toggle:hover {
+      transform: translateY(-5px);
+    }
+
+    body.dark-mode .button-lang {
+      background: #333;
+      /* Màu xám đậm cho giống nút dark-mode */
+      color: #fff;
+      /* Màu trắng cho icon */
+    }
+
+    body.dark-mode .button-lang:hover {
+      background: red;
+      color: yellow;
     }
 
     @media (max-width: 600px) {
@@ -605,17 +688,56 @@
         bottom: 5px;
         right: 8px;
       }
+
+      .dark-mode-toggle {
+        bottom: 80px;
+        /* Thu hẹp khoảng cách một chút trên màn hình nhỏ */
+        right: 20px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .dark-mode-toggle:hover {
+        transform: translateY(-5px);
+        /* Các hiệu ứng hover khác của bạn ở đây */
+      }
+
+      .dark-mode-toggle:active {
+        transform: scale(0.95);
+      }
+
+      #backToTop {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+      }
+
+      #backToTop:hover {
+        transform: translateY(-5px);
+      }
+
+      body.dark-mode .dark-mode-toggle {
+        background-color: #333;
+        color: #fff;
+      }
+
+
+
     }
   </style>
 </head>
 
 <body>
+  <button class="dark-mode-toggle" id="darkModeToggle" title="Dark/Light Mode">
+    <i class="fas fa-moon"></i>
+  </button>
   <div class="container">
     <a class="button-lang" title="Support me" href="/language"></a>
 
     <div style="height: 1rem;"></div>
     <h1><b>Aoxloty's Portfolio</b></h1>
-    <button id="backToTop" title="Lên đầu trang">
+    <button id="backToTop" title="Back to Top">
       <i class="fas fa-chevron-up"></i> </button>
     <div class="profile-header">
       <img src="Untitled-1.png" alt="Aoxloty"
@@ -646,7 +768,7 @@
     <div class="video-wrapper">
       <iframe id="latest-video-frame" src="" frameborder="0" allowfullscreen></iframe>
     </div>
-    <h3 id="latest-video-title" style="margin-top: 10px; font-size: 1.1rem; color: #333;"></h3>
+    <h3 id="latest-video-title"></h3>
     <a href="/video/all-video.html" class="btn-others">Show more</a>
 
     <h2><b>Social Media</b></h2>
@@ -702,6 +824,8 @@
     </div>
 
 
+
+
     <a href="/language/index.html" class="btn-support" style="margin-top: 20px;">Support My Work 💛</a>
 
     <div class="footer">
@@ -715,6 +839,54 @@
 
 
   <script>
+
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const icon = darkModeToggle.querySelector('i');
+
+    // 1. Hàm bật/tắt giao diện
+    function enableDarkMode() {
+      body.classList.add('dark-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+      localStorage.setItem('theme', 'dark');
+    }
+
+    function disableDarkMode() {
+      body.classList.remove('dark-mode');
+      icon.classList.replace('fa-sun', 'fa-moon');
+      localStorage.setItem('theme', 'light');
+    }
+
+    // 2. Kiểm tra trạng thái ban đầu
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      enableDarkMode();
+    }
+
+    // 3. Sự kiện khi nhấn nút thủ công
+    darkModeToggle.addEventListener('click', () => {
+      if (body.classList.contains('dark-mode')) {
+        disableDarkMode();
+      } else {
+        enableDarkMode();
+      }
+      darkModeToggle.blur();
+    });
+
+    // 4. Lắng nghe thay đổi từ hệ thống (Ví dụ: Máy tự đổi sang Dark Mode lúc 6h tối)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      // Chỉ tự động đổi nếu người dùng chưa từng nhấn nút chọn thủ công
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) enableDarkMode();
+        else disableDarkMode();
+      }
+    });
+
+
+
+
     let mybutton = document.getElementById("backToTop");
 
     // Khi người dùng cuộn chuột xuống 20px từ đầu trang, hiện nút
@@ -745,7 +917,6 @@
 
     async function updateDiscord() {
       try {
-        // Lấy dữ liệu profile từ dcdn.dstn.to
         const response = await fetch(`https://dcdn.dstn.to/profile/${MY_ID}`);
         const data = await response.json();
         const user = data.user;
@@ -753,9 +924,7 @@
         const avatarImg = document.getElementById('avatar');
         avatarImg.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=160`;
 
-        // Cập nhật Avatar Decoration (Khung trang trí)
         const deco = document.getElementById('decoration');
-        // Kiểm tra dữ liệu từ discord_user hoặc trực tiếp từ user tùy vào API trả về
         const decoData = (data.discord_user && data.discord_user.avatar_decoration_data)
           || (data.user && data.user.avatar_decoration_data)
           || data.avatar_decoration_data;
@@ -763,15 +932,13 @@
         if (decoData && decoData.asset) {
           const assetId = decoData.asset;
 
-          // Thử đường dẫn assets trước (phổ biến hơn cho các khung mới)
           deco.src = `https://cdn.discordapp.com/avatar-decoration-assets/${assetId}.png?size=160`;
 
-          // Nếu lỗi (không tìm thấy ảnh), tự động đổi sang đường dẫn presets cũ
           deco.onerror = function () {
             if (!this.src.includes('avatar-decoration-presets')) {
               this.src = `https://cdn.discordapp.com/avatar-decoration-presets/${assetId}.png?size=160`;
             } else {
-              this.style.display = "none"; // Nếu cả 2 đều lỗi thì ẩn luôn
+              this.style.display = "none";
             }
           };
 
@@ -921,6 +1088,8 @@
         event.preventDefault();
       }
     })
+
+
   </script>
 </body>
 

@@ -140,6 +140,49 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* --- DARK MODE STYLES --- */
+        body.dark-mode {
+            background: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .container {
+            background: #1e1e1e !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode h1 {
+            color: #ff9800;
+        }
+
+        body.dark-mode .back-home {
+            color: #bbb;
+        }
+
+        body.dark-mode .back-home:hover {
+            color: #ff9800;
+        }
+
+        /* Chỉnh lại card video trong nền tối */
+        body.dark-mode .video-card {
+            background: #252525;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .video-card h3 {
+            color: #ffffff;
+        }
+
+        body.dark-mode .video-card p {
+            color: #aaa;
+        }
+
+        /* Nút Back to Top trong Dark Mode (nếu muốn đổi màu) */
+        body.dark-mode {
+            background-color: #333;
+            border: 1px solid #444;
+        }
     </style>
 </head>
 
@@ -155,11 +198,29 @@
         <div id="video-list" class="video-grid">
         </div>
 
-        <div style="margin-top: 3rem; color: #999;">©2025 Aoxloty.</div>
+        <div style="margin-top: 3rem; color: #999;">©2026 Aoxloty.</div>
     </div>
 
 
     <script>
+
+        // Kiểm tra trạng thái Dark Mode từ LocalStorage ngay khi tải trang
+        (function () {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+
+        // Lắng nghe thay đổi từ các tab khác (nếu người dùng đổi theme ở trang chủ đang mở song song)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'theme') {
+                if (e.newValue === 'dark') {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+            }
+        });
 
         let mybutton = document.getElementById("backToTop");
 

@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Loading Art...</title>
     <style>
-        body { font-family: 'Inter', sans-serif; background: #ebedee; display: flex; justify-content: center; padding: 2rem; }
-        .container { background: #fff; padding: 1.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 600px; width: 90%; text-align: center; margin: 10px auto;}
-        #art-image { width: 100%; height: auto; border-radius: 12px; margin-top: 1rem; }
-        h1 { color: orange; margin-top: 1rem;}
-        .button-home {
-            margin-top: 1rem;   
-            margin-bottom: 0rem;
-            text-decoration: none; color: #333; font-weight: bold; border: 1px solid #ccc; padding: 5px 15px; border-radius: 5px; display: inline-block; transition: 0.3s; 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ebedee;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
         }
-        .button-home:hover { 
-            background: #f0f0f0; 
+
+        .container {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            margin: 10px auto;
+        }
+
+        #art-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        h1 {
+            color: orange;
+            margin-top: 1rem;
+        }
+
+        .button-home {
+            margin-top: 1rem;
+            margin-bottom: 0rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .button-home:hover {
+            background: #f0f0f0;
         }
 
         .btn-link {
@@ -29,15 +65,56 @@
             transition: 0.3s;
             margin-bottom: 1rem;
         }
-        .btn-link:hover { background-color: #1d4ed8; transform: scale(1.05); }
+
+        .btn-link:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+
+        body.dark-mode {
+            background: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+
+        body.dark-mode .container {
+            background: #1e1e1e !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode h1 {
+            color: #ff9800;
+            /* Màu cam nhạt hơn cho dễ nhìn trên nền đen */
+        }
+
+        body.dark-mode .button-home {
+            background: #333;
+            color: #fff;
+            border-color: #444;
+        }
+
+        body.dark-mode .button-home:hover {
+            background: #444;
+        }
+
+        body.dark-mode #art-date {
+            color: #bbb !important;
+        }
+
+        body.dark-mode #art-desc {
+            color: #ccc;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
+
+        <a class="button-home" href="javascript:history.back()">← Back</a>
         <a class="button-home" href="index.html">Home</a>
         <a class="button-home" href="draws/all-art.html">Gallery</a>
 
-        
+
         <h1 id="art-title">Đang tải...</h1>
         <p id="art-date" style="color: #888; font-size: 0.9rem; margin: 5px 0;"></p>
         <p id="art-desc" style="margin-bottom: 1.5rem;"></p>
@@ -54,42 +131,65 @@
     </div>
 
     <script>
-    async function loadArtDetail() {
-    const titleH1 = document.getElementById('art-title');
-    const imageImg = document.getElementById('art-image');
-    const descP = document.getElementById('art-desc');
-    const dateP = document.getElementById('art-date');
-    const linkA = document.getElementById('art-link');
 
-    try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const artId = urlParams.get('id');
 
-        const response = await fetch('data.json');
-        const data = await response.json();
-        
-        
-        const art = data.artData.find(item => item.id === artId);
-
-        if (art) {
-            document.title = `${art.title} | Aoxloty`;
-            if (titleH1) titleH1.innerText = art.title;
-            if (imageImg) imageImg.src = art.image;
-            if (descP) descP.innerText = art.description || '';
-            if (dateP) dateP.innerText = art.date || '';
-            if (linkA && art.link) {
-                linkA.href = art.link;
-                linkA.style.display = 'inline-block';
+        function applyDarkMode() {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
             }
-        } else {
-            if (titleH1) titleH1.innerText = "Không tìm thấy tác phẩm";
         }
-    } catch (error) {
-        console.error(error);
-        if (titleH1) titleH1.innerText = "Lỗi nạp dữ liệu";
-    }
-}
-loadArtDetail();
+
+        // Chạy hàm kiểm tra ngay lập tức
+        applyDarkMode();
+
+        // (Tùy chọn) Lắng nghe nếu bạn mở nhiều tab và đổi Dark Mode ở tab kia
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'theme') {
+                applyDarkMode();
+            }
+        });
+
+
+        async function loadArtDetail() {
+            const titleH1 = document.getElementById('art-title');
+            const imageImg = document.getElementById('art-image');
+            const descP = document.getElementById('art-desc');
+            const dateP = document.getElementById('art-date');
+            const linkA = document.getElementById('art-link');
+
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const artId = urlParams.get('id');
+
+                const response = await fetch('data.json');
+                const data = await response.json();
+
+
+                const art = data.artData.find(item => item.id === artId);
+
+                if (art) {
+                    document.title = `${art.title} | Aoxloty`;
+                    if (titleH1) titleH1.innerText = art.title;
+                    if (imageImg) imageImg.src = art.image;
+                    if (descP) descP.innerText = art.description || '';
+                    if (dateP) dateP.innerText = art.date || '';
+                    if (linkA && art.link) {
+                        linkA.href = art.link;
+                        linkA.style.display = 'inline-block';
+                    }
+                } else {
+                    if (titleH1) titleH1.innerText = "Không tìm thấy tác phẩm";
+                }
+            } catch (error) {
+                console.error(error);
+                if (titleH1) titleH1.innerText = "Lỗi nạp dữ liệu";
+            }
+        }
+        loadArtDetail();
     </script>
+
 </body>
+
 </html>

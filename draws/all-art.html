@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <link href="favicon.ico" rel="icon" type="image/x-icon">
+  <link href="../favicon.ico" rel="icon" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All Artworks | Aoxloty Portfolio</title>
@@ -146,6 +146,51 @@
       opacity: 1;
       visibility: visible;
     }
+
+
+    /* --- DARK MODE STYLES --- */
+    body.dark-mode {
+      background: #121212 !important;
+      color: #e0e0e0 !important;
+    }
+
+    body.dark-mode .container {
+      background: #1e1e1e !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    body.dark-mode h1 {
+      color: #ff9800;
+    }
+
+    body.dark-mode p {
+      color: #aaa;
+    }
+
+    body.dark-mode .back-home {
+      color: #bbb;
+    }
+
+    body.dark-mode .back-home:hover {
+      color: #ff9800;
+    }
+
+    /* Chỉnh lại các ô chứa tranh trong nền tối */
+    body.dark-mode .art-item {
+      background: #252525;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Nút Back to Top trong Dark Mode */
+    body.dark-mode {
+      background-color: #333;
+      border: 1px solid #444;
+    }
+
+    body.dark-mode .footer {
+      color: #666;
+    }
+    
   </style>
 </head>
 
@@ -170,6 +215,27 @@
   </div>
 
   <script>
+
+    // 1. KIỂM TRA DARK MODE NGAY LẬP TỨC
+    (function () {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+      }
+    })();
+
+    // 2. LẮNG NGHE THAY ĐỔI TỪ TAB KHÁC
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme') {
+        if (e.newValue === 'dark') {
+          document.body.classList.add('dark-mode');
+        } else {
+          document.body.classList.remove('dark-mode');
+        }
+      }
+    });
+
+
+
 
     let mybutton = document.getElementById("backToTop");
 
@@ -226,8 +292,60 @@
         if (galleryContainer) galleryContainer.innerHTML = '<p>Lỗi nạp dữ liệu tranh.</p>';
       }
     }
+    async function loadFullGallery() {
+      const galleryContainer = document.getElementById('full-gallery');
+      try {
+        const response = await fetch('../data.json');
+        const data = await response.json();
+
+        if (galleryContainer) galleryContainer.innerHTML = '';
+
+        if (data.artData && Array.isArray(data.artData)) {
+          [...data.artData].reverse().forEach(art => {
+            const artItem = document.createElement('div');
+            artItem.className = 'art-item';
+            const imagePath = art.image.startsWith('http') ? art.image : `../${art.image}`;
+
+            artItem.innerHTML = `
+              <a href="../art.html?id=${art.id}">
+                <img src="${imagePath}" alt="${art.title}">
+              </a>
+            `;
+            galleryContainer.appendChild(artItem);
+          });
+
+          // KHÔI PHỤC VỊ TRÍ CUỘN: Thực hiện sau khi đã render xong HTML
+          const scrollPos = sessionStorage.getItem('scrollPos');
+          if (scrollPos && parseInt(scrollPos) > 0) {
+            // Đợi một chút để ảnh bắt đầu load, tránh việc cuộn khi trang chưa có chiều cao
+            setTimeout(() => {
+              window.scrollTo({
+                top: parseInt(scrollPos),
+                behavior: 'smooth' // Đây là dòng tạo hiệu ứng cuộn từ đầu trang xuống
+              });
+              // Sau khi cuộn xong thì xóa vị trí cũ để không bị cuộn lại khi F5 trang
+              sessionStorage.removeItem('scrollPos');
+            }, 300); // Tăng thời gian chờ lên một chút (150ms) để hiệu ứng mượt hơn
+          }
+
+        } else {
+          galleryContainer.innerHTML = '<p>Chưa có tác phẩm nào để hiển thị.</p>';
+        }
+      } catch (error) {
+        console.error("Lỗi tải Gallery:", error);
+        if (galleryContainer) galleryContainer.innerHTML = '<p>Lỗi nạp dữ liệu tranh.</p>';
+      }
+    }
+
+    // 3. LƯU VỊ TRÍ KHI RỜI TRANG
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('scrollPos', window.scrollY);
+    });
+
+    // 4. CHẠY HÀM (QUAN TRỌNG NHẤT)
     loadFullGallery();
   </script>
+
 </body>
 
 </html>
