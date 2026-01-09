@@ -21,7 +21,7 @@
       font-family: 'Inter', sans-serif;
       background: url('artfightlol.png') no-repeat center center fixed;
       background-size: cover;
-      /* Nếu muốn có cả lớp phủ màu phía trên ảnh */
+      
       background-image: linear-gradient(to right, rgba(253, 251, 251, 0.8), rgba(235, 237, 238, 0.8)), url('artfightlol.png');
       transition: background 0.3s ease, color 0.3s ease;
       background-repeat: no-repeat;
@@ -292,17 +292,17 @@
       color: white;
       margin: 20px auto;
       overflow: hidden;
-      /* Để banner không tràn ra ngoài góc tròn */
+      
       padding: 0 0 15px 0;
-      /* Bỏ padding trên để banner sát mép */
+      
     }
 
     .discord-banner {
       width: 100%;
       height: 60px;
-      /* Độ cao banner */
+      
       background-color: #5865f2;
-      /* Màu mặc định nếu không load được banner */
+      
       background-size: cover;
       background-position: center;
     }
@@ -337,16 +337,16 @@
     .avatar-container {
       position: relative;
       width: 80px;
-      /* Cố định chiều rộng */
+      
       height: 80px;
-      /* Cố định chiều cao */
+      
       margin-top: -40px;
       margin-left: auto;
       margin-right: auto;
       border: 6px solid #111214;
       border-radius: 50%;
       background: #111214;
-      /* Không dùng display: flex ở đây để tránh làm lệch các lớp con */
+      
     }
 
 
@@ -359,7 +359,7 @@
       height: 120%;
       pointer-events: none;
       display: none;
-      /* Chỉ hiện khi có dữ liệu */
+      
     }
 
     .user-info #username {
@@ -392,7 +392,7 @@
       gap: 4px;
     }
 
-    /* Kích thước các icon huy hiệu */
+    
     .badge-icon {
       width: 25px;
       height: 25px;
@@ -428,6 +428,50 @@
       border-radius: 50%;
       object-fit: cover;
       display: block;
+      cursor: pointer;
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    #avatar:hover {
+      filter: brightness(0.3);
+    }
+
+    .avatar-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .avatar-container:hover::before {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .avatar-container::after {
+      content: '\f00e';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 30px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .avatar-container:hover::after {
+      opacity: 1;
     }
 
     #username {
@@ -448,16 +492,16 @@
     #status {
       position: absolute;
       bottom: -2px;
-      /* Đẩy xuống sát mép dưới */
+      
       right: -2px;
-      /* Đẩy sang sát mép phải */
+      
       width: 20px;
       height: 20px;
       border-radius: 50%;
       border: 4px solid #111214;
-      /* Viền đen dày để tạo khoảng cách */
+      
       z-index: 3;
-      /* Luôn nằm trên cùng */
+      
     }
 
     #badges {
@@ -483,7 +527,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
-      /* Hiệu ứng chuyển động mượt mà */
+      
     }
 
     #backToTop i,
@@ -507,12 +551,12 @@
     #backToTop:hover {
       background-color: #1d4ed8;
       transform: translateY(-5px);
-      /* Nhảy nhẹ lên khi di chuột vào */
+      
     }
 
     #backToTop i {
       font-size: 20px;
-      /* Chỉnh cỡ biểu tượng */
+      
     }
 
     #backToTop.show {
@@ -523,9 +567,9 @@
     .dark-mode-toggle {
       position: fixed;
       bottom: 90px;
-      /* Nằm trên nút Back to Top (30px + 50px + 10px khoảng cách) */
+      
       right: 30px;
-      /* Cùng phía bên phải */
+      
       z-index: 99;
       width: 50px;
       height: 50px;
@@ -543,25 +587,25 @@
 
     .dark-mode-toggle i {
       font-size: 20px;
-      /* Tăng kích thước này để hình to ra (mặc định thường là 16-20px) */
+      
     }
 
-    /* Hiệu ứng khi di chuột */
+    
     .dark-mode-toggle:hover {
       transform: translateY(-5px);
     }
 
-    /* Khi ở chế độ tối */
+    
     body.dark-mode .dark-mode-toggle {
       background-color: #333;
       color: #fff;
     }
 
-    /* Các thành phần khác khi ở Dark Mode */
+    
     body.dark-mode {
       background-color: #121212 !important;
 
-      /* Khai báo đầy đủ: ảnh nền + không lặp + căn giữa + cố định */
+      
       background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('artfightlol.png') !important;
       background-repeat: no-repeat !important;
       background-position: center !important;
@@ -593,9 +637,9 @@
 
     body.dark-mode .button-lang {
       background: #333;
-      /* Màu xám đậm cho giống nút dark-mode */
+      
       color: #fff;
-      /* Màu trắng cho icon */
+      
     }
 
     body.dark-mode .button-lang:hover {
@@ -603,7 +647,7 @@
       color: yellow;
     }
 
-    /* Avatar clickable wrapper */
+    
     .avatar-link {
       display: inline-block;
       position: relative;
@@ -631,10 +675,10 @@
       filter: brightness(1.1);
     }
 
-    /* Overlay icon khi hover */
+    
     .avatar-link::after {
       content: '\f08e';
-      /* Font Awesome map icon */
+      
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
@@ -653,6 +697,74 @@
       opacity: 0.9;
     }
 
+    
+    #avatar {
+      cursor: zoom-in;
+      transition: filter 0.3s ease;
+    }
+
+    #avatar:hover {
+      filter: brightness(1.1);
+    }
+
+    .discord-lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      cursor: zoom-out;
+      transition: background-color 0.3s ease;
+    }
+
+    .discord-lightbox.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.95);
+    }
+
+    .discord-lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 50%;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+      transform: scale(0.5);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.3s ease;
+    }
+
+    .discord-lightbox.active img {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .discord-lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      transform: rotate(0deg);
+      transition: all 0.3s ease;
+    }
+
+    .discord-lightbox.active .discord-lightbox-close {
+      opacity: 1;
+    }
+
+    .discord-lightbox-close:hover {
+      color: #ff9800;
+      transform: rotate(90deg) scale(1.1);
+    }
+
     @media (max-width: 600px) {
       .container {
         padding: 1.5rem 1rem;
@@ -660,30 +772,30 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* Ép tất cả con (h2, card, links) vào giữa */
+        
       }
 
       .social-links {
         display: flex;
         flex-wrap: wrap;
-        /* Ép xuống dòng khi hết chỗ */
+        
         justify-content: center;
-        gap: 10px;
-        /* Tăng khoảng cách giữa các icon cho dễ bấm */
+        gap: 10px;    
+        
         max-width: 90%;
-        /* Giới hạn độ rộng để icon gom lại giữa */
+        
         margin: 15px auto;
       }
 
-      /* Tăng kích thước icon */
+      
       .custom-icon-wrapper {
         width: 50px;
-        /* Tăng từ 40px lên 60px */
+        
         height: 50px;
         flex: 0 0 calc(33.33% - 20px);
-        /* Chia 3 cột trên một hàng */
+        
         max-width: 60px;
-        /* Nhưng không để nó to quá mức */
+        
       }
 
       .profile-header {
@@ -719,7 +831,7 @@
       .art-gallery {
         width: 100%;
 
-        /* Ép các thành phần này rộng hết cỡ, không bị bóp thành đường kẻ */
+        
       }
 
       .avatar-container {
@@ -729,17 +841,17 @@
 
       .user-info #username {
         font-size: 16px;
-        /* Giảm cỡ chữ tên */
+        
       }
 
       .user-info #activity {
         font-size: 12px;
-        /* Giảm cỡ chữ trạng thái */
+        
       }
 
       .badge-icon {
         width: 20px;
-        /* Thu nhỏ các huy hiệu */
+        
         height: 20px;
       }
 
@@ -752,7 +864,7 @@
 
       .dark-mode-toggle {
         bottom: 80px;
-        /* Thu hẹp khoảng cách một chút trên màn hình nhỏ */
+        
         right: 20px;
         width: 45px;
         height: 45px;
@@ -760,7 +872,7 @@
 
       .dark-mode-toggle:hover {
         transform: translateY(-5px);
-        /* Các hiệu ứng hover khác ở đây */
+        
       }
 
       .dark-mode-toggle:active {
@@ -782,7 +894,9 @@
         background-color: #333;
         color: #fff;
       }
+      
 
+      
 
 
     }
@@ -801,8 +915,8 @@
     <button id="backToTop" title="Back to Top">
       <i class="fas fa-chevron-up"></i> </button>
     <div class="profile-header">
-      <a href="https://artplace.online/map?zoom=15.35&lat=21.10732&lng=105.79387"
-        class="avatar-link" title="View on ARTPLACE" target="_blank">
+      <a href="https://artplace.online/map?zoom=15.35&lat=21.10732&lng=105.79387" class="avatar-link"
+        title="View on ARTPLACE" target="_blank">
         <img src="Untitled-1.png" alt="Aoxloty" />
       </a>
 
@@ -898,6 +1012,10 @@
     </div>
   </div>
 
+  <div class="discord-lightbox" id="discord-lightbox">
+    <span class="discord-lightbox-close" id="discord-lightbox-close">&times;</span>
+    <img id="discord-lightbox-img" src="" alt="Discord Avatar">
+  </div>
 
 
 
@@ -907,7 +1025,7 @@
     const body = document.body;
     const icon = darkModeToggle.querySelector('i');
 
-    // 1. Hàm bật/tắt giao diện
+
     function enableDarkMode() {
       body.classList.add('dark-mode');
       icon.classList.replace('fa-moon', 'fa-sun');
@@ -920,7 +1038,7 @@
       localStorage.setItem('theme', 'light');
     }
 
-    // 2. Kiểm tra trạng thái ban đầu
+
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -928,7 +1046,7 @@
       enableDarkMode();
     }
 
-    // 3. Sự kiện khi nhấn nút thủ công
+
     darkModeToggle.addEventListener('click', () => {
       if (body.classList.contains('dark-mode')) {
         disableDarkMode();
@@ -938,9 +1056,9 @@
       darkModeToggle.blur();
     });
 
-    // 4. Lắng nghe thay đổi từ hệ thống (Ví dụ: Máy tự đổi sang Dark Mode lúc 6h tối)
+
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      // Chỉ tự động đổi nếu người dùng chưa từng nhấn nút chọn thủ công
+
       if (!localStorage.getItem('theme')) {
         if (e.matches) enableDarkMode();
         else disableDarkMode();
@@ -952,7 +1070,7 @@
 
     let mybutton = document.getElementById("backToTop");
 
-    // Khi người dùng cuộn chuột xuống 20px từ đầu trang, hiện nút
+
     window.onscroll = function () {
       scrollFunction();
     };
@@ -960,7 +1078,7 @@
     function scrollFunction() {
       let mybutton = document.getElementById("backToTop");
 
-      // Kiểm tra nếu cuộn xuống quá 100px
+
       if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         mybutton.classList.add("show");
       } else {
@@ -968,11 +1086,11 @@
       }
     }
 
-    // Khi nhấn vào nút, cuộn lên đầu trang
+
     mybutton.onclick = function () {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth' // Tạo hiệu ứng cuộn mượt mà
+        behavior: 'smooth' 
       });
     };
 
@@ -1010,26 +1128,26 @@
           deco.style.display = "none";
         }
 
-        // 2. Cập nhật Banner (Ưu tiên màu từ API)
+
         const bannerElement = document.getElementById('banner');
         if (user.banner_color) {
           bannerElement.style.backgroundImage = "none";
           bannerElement.style.backgroundColor = user.banner_color;
         }
-        // Nếu có ảnh banner thực thụ
+
         if (user.banner) {
           const ext = user.banner.startsWith("a_") ? "gif" : "png";
           bannerElement.style.backgroundImage = `url(https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${ext}?size=600)`;
         }
 
-        // 3. Cập nhật Tên
+
         document.getElementById('username').innerText = user.global_name || user.username;
 
-        // 4. Cập nhật Badges (Tự động lấy từ API)
+
         const badgesContainer = document.getElementById('badges');
         badgesContainer.innerHTML = '';
 
-        // Kiểm tra cả 2 trường hợp data.badges hoặc data.user_badges từ API dstn.to
+
         const badgeData = data.badges || data.user_badges || [];
 
         if (badgeData.length > 0) {
@@ -1052,17 +1170,17 @@
           });
         }
 
-        // 5. Cập nhật Status & Trạng thái (Lấy từ Lanyard để có thời gian thực)
-        // Vì dstn.to là dữ liệu tĩnh, ta vẫn nên gọi nhẹ Lanyard cho Status nếu muốn nút xanh/đỏ nhảy
+
+
         const lanyardRes = await fetch(`https://api.lanyard.rest/v1/users/${MY_ID}`);
         const lanyardData = await lanyardRes.json();
         const lData = lanyardData.data;
 
-        // Dấu chấm trạng thái
+
         const colors = { online: '#23a55a', idle: '#f0b232', dnd: '#f23f43', offline: '#80848e' };
         document.getElementById('status').style.backgroundColor = colors[lData.discord_status];
 
-        // Câu status (ví dụ: axolotl is cute :3)
+
         const customStatus = lData.activities.find(a => a.type === 4);
         document.getElementById('activity').innerText = customStatus ? (customStatus.state || "") : "Offline";
 
@@ -1073,6 +1191,44 @@
 
     updateDiscord();
     setInterval(updateDiscord, 30000); // Cập nhật mỗi 30 giây
+
+
+    const discordAvatar = document.getElementById('avatar');
+    const discordLightbox = document.getElementById('discord-lightbox');
+    const discordLightboxImg = document.getElementById('discord-lightbox-img');
+    const discordLightboxClose = document.getElementById('discord-lightbox-close');
+
+
+    discordAvatar.addEventListener('click', () => {
+
+      const fullSizeUrl = discordAvatar.src.replace('size=160', 'size=1024');
+      discordLightbox.classList.add('active');
+      discordLightboxImg.src = fullSizeUrl;
+      document.body.style.overflow = 'hidden';
+    });
+
+
+    discordLightbox.addEventListener('click', () => {
+      discordLightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+
+    discordLightboxClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      discordLightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (discordLightbox.classList.contains('active')) {
+          discordLightbox.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      }
+    });
 
 
     async function loadHomeContent() {
