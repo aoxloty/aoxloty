@@ -291,7 +291,7 @@
       color: white;
     }
 
-    /* Dark Mode Toggle Button */
+    
     .dark-mode-toggle {
       position: fixed;
       bottom: 30px;
@@ -319,7 +319,7 @@
       transform: translateY(-5px);
     }
 
-    /* --- DARK MODE STYLES --- */
+    
     body.dark-mode {
       background-color: #121212 !important;
       background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('vietnam.png') !important;
@@ -419,7 +419,7 @@
 </head>
 
 <script>
-  // 1. KIỂM TRA VÀ ÁP DỤNG DARK MODE NGAY LẬP TỨC
+
   (function () {
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -432,7 +432,7 @@
     }
   })();
 
-  // 2. LẮNG NGHE THAY ĐỔI TỪ CÁC TAB KHÁC
+
   window.addEventListener('storage', (e) => {
     if (e.key === 'theme') {
       if (e.newValue === 'dark') {
@@ -445,7 +445,7 @@
     }
   });
 
-  // 3. LẮNG NGHE THAY ĐỔI TỪ HỆ THỐNG
+
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (!localStorage.getItem('theme')) {
       if (e.matches) {
@@ -458,7 +458,7 @@
     }
   });
 
-  // 4. HÀM CẬP NHẬT ICON
+
   function updateDarkModeIcon(isDark) {
     const icon = document.querySelector('.dark-mode-toggle i');
     if (icon) {
@@ -470,18 +470,18 @@
     }
   }
 
-  // 5. XỬ LÝ NÚT TOGGLE SAU KHI DOM LOAD
+
   document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
     const icon = darkModeToggle.querySelector('i');
 
-    // Đồng bộ icon với trạng thái hiện tại
+
     if (body.classList.contains('dark-mode')) {
       icon.classList.replace('fa-moon', 'fa-sun');
     }
 
-    // Xử lý sự kiện click
+
     darkModeToggle.addEventListener('click', () => {
       if (body.classList.contains('dark-mode')) {
         body.classList.remove('dark-mode');

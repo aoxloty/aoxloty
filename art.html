@@ -75,7 +75,7 @@
             transform: scale(1.05);
         }
 
-        /* Dark Mode Toggle Button */
+        
         .dark-mode-toggle {
             position: fixed;
             bottom: 30px;
@@ -103,7 +103,7 @@
             transform: translateY(-5px);
         }
 
-        /* Dark Mode Styles */
+        
         body.dark-mode {
             background: #121212 !important;
             color: #e0e0e0 !important;
@@ -142,7 +142,7 @@
         }
 
 
-        /* Lightbox styles */
+        
         .lightbox {
             display: none;
             position: fixed;
@@ -259,7 +259,7 @@
                 transform: scale(0.95);
             }
 
-            /* Đẩy nút Dark Mode lên cao hơn để không che */
+            
             .dark-mode-toggle {
                 bottom: 80px;
             }
@@ -325,26 +325,26 @@
         <img id="lightbox-img" src="" alt="Enlarged image">
     </div>
     <script>
-        // Dark Mode Toggle với localStorage
+
         const darkModeToggle = document.getElementById('darkModeToggle');
         const body = document.body;
         const icon = darkModeToggle.querySelector('i');
 
-        // Hàm bật Dark Mode
+
         function enableDarkMode() {
             body.classList.add('dark-mode');
             icon.classList.replace('fa-moon', 'fa-sun');
             localStorage.setItem('theme', 'dark');
         }
 
-        // Hàm tắt Dark Mode
+
         function disableDarkMode() {
             body.classList.remove('dark-mode');
             icon.classList.replace('fa-sun', 'fa-moon');
             localStorage.setItem('theme', 'light');
         }
 
-        // Kiểm tra trạng thái ban đầu
+
         function applyDarkMode() {
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -356,10 +356,10 @@
             }
         }
 
-        // Áp dụng ngay khi tải trang
+
         applyDarkMode();
 
-        // Sự kiện khi nhấn nút
+
         darkModeToggle.addEventListener('click', () => {
             if (body.classList.contains('dark-mode')) {
                 disableDarkMode();
@@ -369,14 +369,14 @@
             darkModeToggle.blur();
         });
 
-        // Lắng nghe thay đổi từ tab khác
+
         window.addEventListener('storage', (e) => {
             if (e.key === 'theme') {
                 applyDarkMode();
             }
         });
 
-        // Lắng nghe thay đổi từ hệ thống
+
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
             if (!localStorage.getItem('theme')) {
                 if (e.matches) enableDarkMode();
@@ -384,11 +384,11 @@
             }
         });
 
-        // Load Art Detail
+
         let allArtData = [];
         let currentArtIndex = -1;
 
-        // Load Art Detail
+
         async function loadArtDetail() {
             const titleH1 = document.getElementById('art-title');
             const imageImg = document.getElementById('art-image');
@@ -405,10 +405,10 @@
                 const response = await fetch('data.json');
                 const data = await response.json();
 
-                // Lưu toàn bộ danh sách art (đảo ngược để mới nhất ở đầu)
+
                 allArtData = [...data.artData].reverse();
 
-                // Tìm index của art hiện tại
+
                 currentArtIndex = allArtData.findIndex(item => item.id === artId);
                 const art = allArtData[currentArtIndex];
 
@@ -423,7 +423,7 @@
                         linkA.style.display = 'inline-block';
                     }
 
-                    // Cập nhật trạng thái nút Previous/Next
+
                     if (prevBtn) {
                         prevBtn.disabled = currentArtIndex === 0;
                     }
@@ -439,7 +439,7 @@
             }
         }
 
-        // Hàm chuyển sang tranh trước/sau
+
         function navigateArt(direction) {
             if (direction === 'prev' && currentArtIndex > 0) {
                 const prevArt = allArtData[currentArtIndex - 1];
@@ -450,7 +450,7 @@
             }
         }
 
-        // Gắn sự kiện cho các nút
+
         document.addEventListener('DOMContentLoaded', () => {
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
@@ -462,7 +462,7 @@
                 nextBtn.addEventListener('click', () => navigateArt('next'));
             }
 
-            // Hỗ trợ phím mũi tên
+
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowLeft') navigateArt('prev');
                 if (e.key === 'ArrowRight') navigateArt('next');
@@ -471,20 +471,20 @@
 
         loadArtDetail();
 
-        // Lightbox functionality
+
         const artImage = document.getElementById('art-image');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.getElementById('lightbox-close');
 
-        // Mở lightbox khi click vào ảnh
+
         artImage.addEventListener('click', () => {
             lightbox.classList.add('active');
             lightboxImg.src = artImage.src;
-            document.body.style.overflow = 'hidden'; // Chặn scroll
+            document.body.style.overflow = 'hidden';
         });
 
-        // Đóng lightbox khi click vào nền hoặc nút X
+
         lightbox.addEventListener('click', () => {
             lightbox.classList.remove('active');
             document.body.style.overflow = 'auto';
@@ -496,7 +496,7 @@
             document.body.style.overflow = 'auto';
         });
 
-        // Đóng bằng phím ESC
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 lightbox.classList.remove('active');

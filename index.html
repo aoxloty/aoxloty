@@ -112,11 +112,16 @@
 
 
     .art-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 180px));
+      display: flex;
+      flex-wrap: wrap;
       gap: 15px;
       margin-bottom: 0.5rem;
       justify-content: center;
+    }
+
+    .art-item {
+      width: 180px;
+      flex-shrink: 0;
     }
 
     .art-item img {
@@ -333,9 +338,9 @@
       position: absolute;
       top: 50%;
       right: 20px;
-      /* Thay đổi từ left: 50% */
+      
       transform: translateY(-50%);
-      /* Bỏ translateX */
+      
       font-size: 24px;
       color: white;
       opacity: 0;
@@ -493,7 +498,7 @@
       cursor: pointer;
       position: relative;
 
-      /* Cắt text và hiện dấu ... */
+      
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -609,7 +614,7 @@
       transition: background-color 0.3s ease;
       pointer-events: none;
       z-index: 2;
-      /* Thay đổi từ 4 */
+      
     }
 
     .avatar-container:hover::before {
@@ -884,7 +889,7 @@
 
     #avatar:hover {
       filter: brightness(0.7);
-      /* Thay đổi từ 0.3 để nhẹ hơn */
+      
     }
 
 
@@ -1435,14 +1440,14 @@
         if (user.banner_color) {
           bannerElement.style.backgroundImage = "none";
           bannerElement.style.backgroundColor = user.banner_color;
-          currentBannerUrl = ''; 
+          currentBannerUrl = '';
         }
 
         if (user.banner) {
           const ext = user.banner.startsWith("a_") ? "gif" : "png";
           const bannerUrl = `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${ext}?size=1024`;
           bannerElement.style.backgroundImage = `url(${bannerUrl})`;
-          currentBannerUrl = bannerUrl; 
+          currentBannerUrl = bannerUrl;
         }
 
 
@@ -1489,7 +1494,7 @@
         const customStatus = lData.activities.find(a => a.type === 4);
         document.getElementById('activity').innerText = customStatus ? (customStatus.state || "") : "Offline";
 
-        
+
 
       } catch (e) {
         console.error("Lỗi khi tải dữ liệu Discord:", e);
@@ -1497,7 +1502,7 @@
     }
 
     updateDiscord();
-    setInterval(updateDiscord, 20000); 
+    setInterval(updateDiscord, 20000);
 
 
     const discordAvatar = document.getElementById('avatar');
@@ -1601,7 +1606,8 @@
 
         if (galleryContainer && data.artData) {
           galleryContainer.innerHTML = '';
-          const latestArts = [...data.artData].reverse().slice(0, 3);
+          const itemCount = window.innerWidth <= 600 ? 4 : 3;
+          const latestArts = [...data.artData].reverse().slice(0, itemCount);
 
           latestArts.forEach(art => {
             const artItem = document.createElement('div');

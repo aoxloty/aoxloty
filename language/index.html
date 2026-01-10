@@ -199,7 +199,7 @@
       content: "\f015\00a0";
     }
 
-    /* Dark Mode Toggle Button */
+    
     .dark-mode-toggle {
       position: fixed;
       bottom: 30px;
@@ -227,7 +227,7 @@
       transform: translateY(-5px);
     }
 
-    /* --- DARK MODE STYLES --- */
+    
     body.dark-mode {
       background-color: #121212 !important;
       color: #e0e0e0 !important;
@@ -312,7 +312,7 @@
 </head>
 
 <script>
-  // KIỂM TRA VÀ ÁP DỤNG DARK MODE TỪ LOCALSTORAGE
+
   (function () {
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -325,7 +325,7 @@
     }
   })();
 
-  // LẮNG NGHE THAY ĐỔI TỪ CÁC TAB KHÁC
+
   window.addEventListener('storage', (e) => {
     if (e.key === 'theme') {
       if (e.newValue === 'dark') {
@@ -338,7 +338,7 @@
     }
   });
 
-  // LẮNG NGHE THAY ĐỔI TỪ HỆ THỐNG
+
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (!localStorage.getItem('theme')) {
       if (e.matches) {
@@ -351,7 +351,7 @@
     }
   });
 
-  // HÀM CẬP NHẬT ICON
+
   function updateDarkModeIcon(isDark) {
     const icon = document.querySelector('.dark-mode-toggle i');
     if (icon) {
@@ -363,18 +363,18 @@
     }
   }
 
-  // XỬ LÝ NÚT TOGGLE SAU KHI DOM LOAD
+
   document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
     const icon = darkModeToggle.querySelector('i');
 
-    // Đồng bộ icon với trạng thái hiện tại
+
     if (body.classList.contains('dark-mode')) {
       icon.classList.replace('fa-moon', 'fa-sun');
     }
 
-    // Xử lý sự kiện click
+
     darkModeToggle.addEventListener('click', () => {
       if (body.classList.contains('dark-mode')) {
         body.classList.remove('dark-mode');

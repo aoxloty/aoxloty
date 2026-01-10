@@ -100,7 +100,7 @@
             color: #666;
         }
 
-        /* Nút Back to Top */
+        
         #backToTop {
             opacity: 0;
             visibility: hidden;
@@ -136,11 +136,11 @@
             visibility: visible;
         }
 
-        /* Nút Dark Mode Toggle - ĐẶT PHÍA TRÊN NÚT BACK TO TOP */
+        
         .dark-mode-toggle {
             position: fixed;
             bottom: 90px;
-            /* 30px (bottom của backToTop) + 50px (height) + 10px spacing = 90px */
+            
             right: 30px;
             z-index: 99;
             width: 50px;
@@ -165,7 +165,7 @@
             transform: translateY(-5px);
         }
 
-        /* --- DARK MODE STYLES --- */
+        
         body.dark-mode {
             background: #121212 !important;
             color: #e0e0e0 !important;
@@ -217,11 +217,11 @@
             color: #fff;
         }
 
-        /* Responsive */
+        
         @media (max-width: 600px) {
             .dark-mode-toggle {
                 bottom: 80px;
-                /* Điều chỉnh cho mobile */
+                
                 right: 20px;
                 width: 45px;
                 height: 45px;
@@ -265,26 +265,26 @@
     </div>
 
     <script>
-        // === DARK MODE FUNCTIONALITY ===
+
         const darkModeToggle = document.getElementById('darkModeToggle');
         const body = document.body;
         const icon = darkModeToggle.querySelector('i');
 
-        // Hàm bật Dark Mode
+
         function enableDarkMode() {
             body.classList.add('dark-mode');
             icon.classList.replace('fa-moon', 'fa-sun');
             localStorage.setItem('theme', 'dark');
         }
 
-        // Hàm tắt Dark Mode
+
         function disableDarkMode() {
             body.classList.remove('dark-mode');
             icon.classList.replace('fa-sun', 'fa-moon');
             localStorage.setItem('theme', 'light');
         }
 
-        // Kiểm tra trạng thái ban đầu
+
         (function () {
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -294,7 +294,7 @@
             }
         })();
 
-        // Sự kiện khi nhấn nút Dark Mode
+
         darkModeToggle.addEventListener('click', () => {
             if (body.classList.contains('dark-mode')) {
                 disableDarkMode();
@@ -304,7 +304,7 @@
             darkModeToggle.blur();
         });
 
-        // Lắng nghe thay đổi từ tab khác
+
         window.addEventListener('storage', (e) => {
             if (e.key === 'theme') {
                 if (e.newValue === 'dark') {
@@ -317,7 +317,7 @@
             }
         });
 
-        // Lắng nghe thay đổi từ hệ thống
+
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
             if (!localStorage.getItem('theme')) {
                 if (e.matches) enableDarkMode();
@@ -325,7 +325,7 @@
             }
         });
 
-        // === BACK TO TOP FUNCTIONALITY ===
+
         let mybutton = document.getElementById("backToTop");
 
         window.onscroll = function () {
@@ -347,7 +347,7 @@
             });
         };
 
-        // === LOAD VIDEOS ===
+
         async function initVideos() {
             const container = document.getElementById('video-list');
 
