@@ -1031,6 +1031,52 @@
       margin-top: 2px;
     }
 
+    /* Di chuyển TRƯỚC @media query */
+    .view-counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(88, 101, 242, 0.1);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 15px;
+      color: #5865f2;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(88, 101, 242, 0.2);
+    }
+
+    .view-counter:hover {
+      background: rgba(88, 101, 242, 0.15);
+    }
+
+    .view-counter i {
+      font-size: 16px;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    body.dark-mode .view-counter {
+      background: rgba(88, 101, 242, 0.15);
+      color: #7289da;
+      border-color: rgba(88, 101, 242, 0.3);
+    }
+
+    body.dark-mode .view-counter:hover {
+      background: rgba(88, 101, 242, 0.25);
+    }
+
     @media (max-width: 600px) {
       .container {
         padding: 1.5rem 1rem;
@@ -1338,6 +1384,12 @@
       Template by <a href="https://github.com/congtuuit/donate-page-template" target="blank"
         class="text-cre"><u>congtuuit</u></a>.
     </div>
+    <div style="text-align: center; margin: 20px 0;">
+      <div class="view-counter">
+        <i class="fas fa-eye"></i>
+        <span id="visitor-count">...</span> views
+      </div>
+    </div>
   </div>
 
   <div class="discord-lightbox" id="discord-lightbox">
@@ -1351,6 +1403,11 @@
   </div>
 
   <div class="status-tooltip" id="status-tooltip"></div>
+
+
+
+
+
   <script>
 
     const darkModeToggle = document.getElementById('darkModeToggle');
@@ -1799,6 +1856,78 @@
     })
 
 
+  </script>
+
+
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getDatabase, ref, set, get, runTransaction } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+
+    // Firebase config - THAY BẰNG CONFIG CỦA BẠN
+    const firebaseConfig = {
+      apiKey: "AIzaSyALTrutr6VsBSPyv0RDVSnuZ1by8HTD_Hs",
+      authDomain: "aoxloty-ab7b3.firebaseapp.com",
+      databaseURL: "https://aoxloty-ab7b3-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "aoxloty-ab7b3",
+      storageBucket: "aoxloty-ab7b3.firebasestorage.app",
+      messagingSenderId: "656551781954",
+      appId: "1:656551781954:web:520ad183ddd5de7f476fdb"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const viewsRef = ref(db, 'portfolio/views');
+    const viewersRef = ref(db, 'portfolio/viewers');
+
+    // IP của bạn - THAY BẰNG IP CỦA BẠN
+    const YOUR_IP = '171.241.111.14'; // Để trống để tự động lấy
+
+    async function trackView() {
+      try {
+        // Lấy IP hiện tại
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        const currentIP = ipData.ip;
+
+        // Lưu IP của bạn vào console lần đầu
+        if (!YOUR_IP) {
+          console.log('Your IP:', currentIP);
+          console.log('Copy IP này và paste vào biến YOUR_IP để không tính view của bạn');
+        }
+
+        // Kiểm tra xem IP này đã view chưa
+        const viewerSnapshot = await get(ref(db, `portfolio/viewers/${currentIP.replace(/\./g, '_')}`));
+        const hasViewed = viewerSnapshot.exists();
+
+        // Chỉ tăng view nếu chưa xem và không phải IP của bạn
+        if (!hasViewed && currentIP !== YOUR_IP) {
+          // Tăng số view
+          await runTransaction(viewsRef, (currentViews) => {
+            return (currentViews || 0) + 1;
+          });
+
+          // Đánh dấu IP đã view
+          await set(ref(db, `portfolio/viewers/${currentIP.replace(/\./g, '_')}`), {
+            timestamp: Date.now(),
+            date: new Date().toISOString()
+          });
+        }
+
+        // Hiển thị số view
+        const snapshot = await get(viewsRef);
+        const viewCount = snapshot.val() || 0;
+        document.getElementById('visitor-count').innerText = viewCount.toLocaleString();
+
+      } catch (error) {
+        console.error('Error tracking view:', error);
+        document.getElementById('visitor-count').innerText = '---';
+      }
+    }
+
+    // Chạy khi trang load
+    trackView();
   </script>
 </body>
 
