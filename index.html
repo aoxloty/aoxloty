@@ -290,9 +290,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: #121114;
+      background: #323339;
       border-radius: 12px;
-      width: 300px;
+      width: 40%;
       min-width: 300px;
       color: white;
       margin: 20px auto;
@@ -450,9 +450,9 @@
       margin-top: -40px;
       margin-left: auto;
       margin-right: auto;
-      border: 6px solid #111214;
+      border: 6px solid #323339;
       border-radius: 50%;
-      background: #111214;
+      background: #323339;
 
     }
 
@@ -674,7 +674,7 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      border: 4px solid #111214;
+      border: 4px solid #323339;
       z-index: 10;
       pointer-events: none;
     }
@@ -975,16 +975,18 @@
     }
 
     .activity-card {
-      background: rgba(0, 0, 0, 0.3);
+      background-color: #2b2d31;
       border-radius: 8px;
       padding: 10px 12px;
-      margin-top: 8px;
+      margin-top: 1px;
+      margin-bottom: 7px;
       width: 100%;
-      max-width: 270px;
+      max-width: 100%;
       display: none;
       flex-direction: row;
       gap: 10px;
       align-items: center;
+
     }
 
     .activity-card.active {
@@ -1122,7 +1124,7 @@
       .discord-card {
         display: flex !important;
         align-items: center;
-        background: #111214;
+        background: #323339;
         padding: 12px 15px;
         border-radius: 12px;
         width: 100%;
@@ -1173,6 +1175,7 @@
         height: 25px;
         border-width: 5px;
       }
+
 
 
       .badge-icon {
@@ -1226,30 +1229,13 @@
         color: #fff;
       }
 
-      .activity-card {
-        max-width: 100%;
-        padding: 8px 10px;
-      }
 
-      .activity-image {
-        width: 50px;
-        height: 50px;
-      }
-
-      .activity-name {
-        font-size: 13px;
-      }
-
-      .activity-state,
-      .activity-details-text {
-        font-size: 11px;
-      }
 
       .badge-wrapper:hover::after {
         content: attr(data-title);
         position: fixed;
         bottom: auto;
-        top: calc(65% + 8px);
+        top: calc(75% + 8px);
         left: 50%;
         transform: translateX(-50%);
         background-color: #111214;
@@ -1262,7 +1248,12 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       }
 
-
+      /* .activity-name, .activity-details, .activity-state, .activity-details-text {
+        word-wrap: break-word;
+        white-space: normal;
+        line-height: 1.2;
+      
+      } */
     }
   </style>
 </head>
@@ -1490,6 +1481,7 @@
 
     const MY_ID = "639087320795971625";
     let currentBannerUrl = '';
+    let elapsedTimeInterval = null;
 
     async function updateDiscord() {
       try {
@@ -1583,6 +1575,104 @@
 
         const customStatus = lData.activities.find(a => a.type === 4);
         document.getElementById('activity').innerText = customStatus ? (customStatus.state || "") : "Offline";
+
+
+        const activityCard = document.getElementById('activity-card');
+        const activityImage = document.getElementById('activity-image');
+        const activityName = document.getElementById('activity-name');
+        const activityState = document.getElementById('activity-state');
+        const activityDetails = document.getElementById('activity-details-text');
+        const activityTimestamp = document.getElementById('activity-timestamp');
+
+        if (elapsedTimeInterval) {
+          clearInterval(elapsedTimeInterval);
+          elapsedTimeInterval = null;
+        }
+
+        // Lọc activity (loại bỏ custom status type 4)
+        const mainActivity = lData.activities.find(a => a.type !== 4);
+
+
+
+        if (mainActivity) {
+          let hasIcon = false;
+
+          if (mainActivity.assets && (mainActivity.assets.large_image || mainActivity.assets.small_image)) {
+            const asset = mainActivity.assets.large_image || mainActivity.assets.small_image;
+            let imageUrl = '';
+
+            if (mainActivity.name === 'Spotify') {
+              imageUrl = `https://i.scdn.co/image/${asset.replace('spotify:', '')}`;
+            } else if (asset.startsWith('mp:external/')) {
+              imageUrl = `https://media.discordapp.net/external/${asset.split('mp:external/')[1]}`;
+            } else if (mainActivity.application_id) {
+              imageUrl = `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${asset}.png`;
+            }
+
+            if (imageUrl) {
+              activityImage.src = imageUrl;
+              activityImage.style.display = 'block';
+              hasIcon = true;
+            } else {
+              activityImage.style.display = 'none';
+            }
+          } else {
+            activityImage.style.display = 'none';
+          }
+
+
+          // Hiển thị activity card
+          activityCard.classList.add('active');
+
+          // Tên activity
+          if (hasIcon) {
+            activityName.innerText = mainActivity.name || 'Unknown';
+          } else {
+            activityName.innerText = `Playing ${mainActivity.name || 'Unknown'}`;
+          }
+
+
+          // State (dòng đầu tiên)
+          activityState.innerText = mainActivity.state || '';
+
+          // Details (dòng thứ hai)
+          activityDetails.innerText = mainActivity.details || '';
+
+
+          // Timestamp (elapsed time)
+          if (mainActivity.timestamps && mainActivity.timestamps.start) {
+            const startTime = mainActivity.timestamps.start;
+            const updateElapsedTime = () => {
+              const elapsed = Date.now() - startTime;
+              const seconds = Math.floor((elapsed / 1000) % 60);
+              const minutes = Math.floor((elapsed / (1000 * 60)) % 60);
+              const hours = Math.floor((elapsed / (1000 * 60 * 60)) % 24);
+
+              if (hours > 0) {
+                activityTimestamp.innerText = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} elapsed`;
+              } else {
+                activityTimestamp.innerText = `${minutes}:${seconds.toString().padStart(2, '0')} elapsed`;
+              }
+            };
+
+            updateElapsedTime();
+            // Cập nhật mỗi giây
+
+            elapsedTimeInterval = setInterval(updateElapsedTime, 1000)
+          } else {
+            activityTimestamp.innerText = '';
+          }
+
+
+        } else {
+          // Không có activity → ẩn card
+          if (elapsedTimeInterval) {
+            clearInterval(elapsedTimeInterval);
+            elapsedTimeInterval = null;
+          }
+          activityCard.classList.remove('active');
+          activityTimestamp.innerText = '';
+        }
 
 
 
@@ -1818,7 +1908,8 @@
 
 
   </script>
-  <script type="module" src="js/view-tracker.js"></script>
+  <script type="module" src="js/view.js"></script>
+
 </body>
 
 </html>
