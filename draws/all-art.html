@@ -15,6 +15,59 @@
       padding: 0;
     }
 
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100000;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    #loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    body.dark-mode #loading-screen {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #fdfbfb, #ebedee);
@@ -106,7 +159,7 @@
       transition: color 0.3s ease;
     }
 
-    
+
     #backToTop {
       opacity: 0;
       visibility: hidden;
@@ -142,11 +195,11 @@
       visibility: visible;
     }
 
-    
+
     .dark-mode-toggle {
       position: fixed;
       bottom: 90px;
-      
+
       right: 30px;
       z-index: 99;
       width: 50px;
@@ -171,7 +224,7 @@
       transform: translateY(-5px);
     }
 
-    
+
     body.dark-mode {
       background: #121212 !important;
       color: #e0e0e0 !important;
@@ -212,7 +265,7 @@
       color: #fff;
     }
 
-    
+
     @media (max-width: 600px) {
       .dark-mode-toggle {
         bottom: 80px;
@@ -237,12 +290,14 @@
 </head>
 
 <body>
-  <!-- Nút Dark Mode Toggle - ĐẶT TRƯỚC NÚT BACK TO TOP -->
+  <div id="loading-screen">
+    <div class="loader"></div>
+    <div class="loading-text">Loading artworks...</div>
+  </div>
   <button class="dark-mode-toggle" id="darkModeToggle" title="Dark/Light Mode">
     <i class="fas fa-moon"></i>
   </button>
 
-  <!-- Nút Back to Top -->
   <button id="backToTop" title="Lên đầu trang">
     <i class="fas fa-chevron-up"></i>
   </button>
@@ -348,6 +403,8 @@
 
     async function loadFullGallery() {
       const galleryContainer = document.getElementById('full-gallery');
+      const loadingScreen = document.getElementById('loading-screen');
+
       try {
         const response = await fetch('../data.json');
         const data = await response.json();
@@ -355,19 +412,34 @@
         if (galleryContainer) galleryContainer.innerHTML = '';
 
         if (data.artData && Array.isArray(data.artData)) {
+          let loadedImages = 0;
+          const totalImages = data.artData.length;
+
           [...data.artData].reverse().forEach(art => {
             const artItem = document.createElement('div');
             artItem.className = 'art-item';
             const imagePath = art.image.startsWith('http') ? art.image : `../${art.image}`;
 
-            artItem.innerHTML = `
-              <a href="../art.html?id=${art.id}">
-                <img src="${imagePath}" alt="${art.title}">
-              </a>
-            `;
+            const img = new Image();
+            img.loading = 'lazy'; 
+            img.src = imagePath;
+            img.alt = art.title;
+
+            img.onload = () => {
+              loadedImages++;
+              if (loadedImages >= totalImages * 0.7 && loadingScreen) {
+                loadingScreen.classList.add('hidden');
+              }
+            };
+
+            artItem.innerHTML = `<a href="../art.html?id=${art.id}"></a>`;
+            artItem.querySelector('a').appendChild(img);
             galleryContainer.appendChild(artItem);
           });
 
+          setTimeout(() => {
+            if (loadingScreen) loadingScreen.classList.add('hidden');
+          }, 3000);
 
           const scrollPos = sessionStorage.getItem('scrollPos');
           if (scrollPos && parseInt(scrollPos) > 0) {
@@ -382,10 +454,12 @@
 
         } else {
           galleryContainer.innerHTML = '<p>Chưa có tác phẩm nào để hiển thị.</p>';
+          if (loadingScreen) loadingScreen.classList.add('hidden');
         }
       } catch (error) {
-        console.error("Lỗi tải Gallery:", error);
-        if (galleryContainer) galleryContainer.innerHTML = '<p>Error to loading.</p>';
+        console.error("Error when loading Gallery:", error);
+        if (galleryContainer) galleryContainer.innerHTML = '<p>Error loading artworks.</p>';
+        if (loadingScreen) loadingScreen.classList.add('hidden');
       }
     }
 

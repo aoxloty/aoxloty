@@ -18,6 +18,59 @@
       padding: 0;
     }
 
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100000;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    #loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    body.dark-mode #loading-screen {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to right, #fdfbfb, #ebedee);
@@ -299,7 +352,7 @@
       transform: scale(1.05);
     }
 
-    
+
     .dark-mode-toggle {
       position: fixed;
       bottom: 30px;
@@ -327,7 +380,7 @@
       transform: translateY(-5px);
     }
 
-    
+
     body.dark-mode {
       background-color: #121212 !important;
       background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('artfightlol.png') !important;
@@ -528,7 +581,10 @@
 </script>
 
 <body onmousedown="return false" onselectstart="return false">
-  <!-- Nút Dark Mode Toggle -->
+  <div id="loading-screen">
+    <div class="loader"></div>
+    <div class="loading-text">Loading...</div>
+  </div>
   <button class="dark-mode-toggle" id="darkModeToggle" title="Dark/Light Mode">
     <i class="fas fa-moon"></i>
   </button>
@@ -553,6 +609,19 @@
       ©2026 Aoxloty.<br />
     </div>
   </div>
+  <script>
+    window.addEventListener('load', function () {
+      const loadingScreen = document.getElementById('loading-screen');
+
+      setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+
+        setTimeout(() => {
+          loadingScreen.remove();
+        }, 500);
+      }, 500);
+    });
+  </script>
 </body>
 
 </html>
