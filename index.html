@@ -44,11 +44,11 @@
       border-radius: 16px 16px 0 0;
       cursor: pointer;
       position: relative;
-      /* KHÔNG dùng overflow:hidden ở đây để avatar không bị clip */
+
       transition: filter 0.3s;
     }
 
-    /* Inner wrapper giới hạn overlay chỉ trong vùng banner */
+
     .discord-banner-inner {
       position: absolute;
       inset: 0;
@@ -142,13 +142,13 @@
 
     #username {
       font-weight: 700;
-      font-size: 17px;
+      font-size: 19px;
       color: #fff;
       word-break: break-word;
     }
 
     #activity {
-      font-size: 13px;
+      font-size: 14px;
       color: #b5bac1;
       max-width: 230px;
       white-space: nowrap;
@@ -159,14 +159,14 @@
     }
     #activity:hover { color: #dcddde; }
 
-    /* Badges */
+    
     #badges {
       display: flex;
       gap: 4px;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 2px;
+      margin-top: 10px;
     }
 
     .badge-wrapper {
@@ -183,7 +183,7 @@
       color: white;
       padding: 4px 8px;
       border-radius: 4px;
-      font-size: 11px;
+      font-size: 13px;
       white-space: nowrap;
       z-index: 9999;
       box-shadow: 0 2px 8px rgba(0,0,0,0.6);
@@ -191,7 +191,7 @@
     }
 
     .badge-icon {
-      width: 22px; height: 22px;
+      width: 25px; height: 25px;
       object-fit: contain;
       cursor: pointer;
     }
@@ -227,7 +227,7 @@
 
     .activity-name {
       font-weight: 600;
-      font-size: 13px;
+      font-size: 15px;
       color: #fff;
       white-space: nowrap;
       overflow: hidden;
@@ -235,14 +235,14 @@
     }
     .activity-state,
     .activity-details-text {
-      font-size: 11px;
+      font-size: 13px;
       color: #b5bac1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .activity-timestamp {
-      font-size: 10px;
+      font-size: 12px;
       color: #6d6f78;
       margin-top: 2px;
     }
@@ -303,7 +303,7 @@
     .lightbox.active .lightbox-close { opacity: 1; }
     .lightbox-close:hover { color: #ff9800; transform: rotate(90deg) scale(1.1); }
 
-    /* Tooltip for custom status */
+
     .status-tooltip {
       display: none;
       position: fixed;
