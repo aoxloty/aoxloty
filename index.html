@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,13 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
       background: transparent;
       display: flex;
       justify-content: center;
+      /* [CẢI TIẾN 1] Định vị: top-center */
       align-items: flex-start;
       min-height: 100vh;
       padding: 12px;
@@ -31,7 +37,7 @@
       color: white;
       overflow: visible;
       padding: 0 0 16px 0;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     }
 
     /* Banner */
@@ -44,11 +50,10 @@
       border-radius: 16px 16px 0 0;
       cursor: pointer;
       position: relative;
-
       transition: filter 0.3s;
     }
 
-
+    /* [CẢI TIẾN 2] Khắc phục hover đè avatar bằng việc áp dụng hiệu ứng hoàn toàn bên trong lớp bọc cô lập */
     .discord-banner-inner {
       position: absolute;
       inset: 0;
@@ -56,27 +61,42 @@
       overflow: hidden;
       pointer-events: none;
     }
+
     .discord-banner-inner::before {
       content: '';
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,0);
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
       transition: background 0.3s;
     }
-    .discord-banner:hover .discord-banner-inner::before { background: rgba(0,0,0,0.5); }
+
+    .discord-banner:hover .discord-banner-inner::before {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
     .discord-banner-inner::after {
       content: '\f00e';
-      font-family: 'Font Awesome 6 Free'; font-weight: 900;
-      position: absolute; top: 50%; right: 16px;
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 50%;
+      right: 16px;
       transform: translateY(-50%);
-      font-size: 20px; color: white;
-      opacity: 0; transition: opacity 0.3s;
+      font-size: 20px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
-    .discord-banner:hover .discord-banner-inner::after { opacity: 1; }
+
+    .discord-banner:hover .discord-banner-inner::after {
+      opacity: 1;
+    }
 
     /* Avatar */
     .avatar-container {
       position: relative;
-      width: 80px; height: 80px;
+      width: 80px;
+      height: 80px;
       margin-top: -40px;
       border: 6px solid #111214;
       border-radius: 50%;
@@ -85,45 +105,67 @@
     }
 
     #avatar {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       object-fit: cover;
       display: block;
-      position: relative; z-index: 1;
+      position: relative;
+      z-index: 1;
       transition: filter 0.3s;
     }
-    .avatar-container:hover #avatar { filter: brightness(0.4); }
+
+    .avatar-container:hover #avatar {
+      filter: brightness(0.4);
+    }
 
     .avatar-container::before {
       content: '';
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       border-radius: 50%;
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
       transition: background 0.3s;
-      z-index: 2; pointer-events: none;
+      z-index: 2;
+      pointer-events: none;
     }
+
     .avatar-container::after {
       content: '\f00e';
-      font-family: 'Font Awesome 6 Free'; font-weight: 900;
-      position: absolute; top: 50%; left: 50%;
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 26px; color: white;
-      opacity: 0; transition: opacity 0.3s;
-      pointer-events: none; z-index: 3;
+      font-size: 26px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 3;
     }
-    .avatar-container:hover::after { opacity: 1; }
+
+    .avatar-container:hover::after {
+      opacity: 1;
+    }
 
     #decoration {
       position: absolute;
-      top: -11%; left: -11%;
-      width: 122%; height: 122%;
-      z-index: 4; pointer-events: none;
+      top: -11%;
+      left: -11%;
+      width: 122%;
+      height: 122%;
+      z-index: 4;
+      pointer-events: none;
     }
 
     #status {
       position: absolute;
-      bottom: -2px; right: -2px;
-      width: 18px; height: 18px;
+      bottom: -2px;
+      right: -2px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       border: 4px solid #111214;
       z-index: 10;
@@ -157,9 +199,11 @@
       cursor: pointer;
       transition: color 0.2s;
     }
-    #activity:hover { color: #dcddde; }
 
-    
+    #activity:hover {
+      color: #dcddde;
+    }
+
     #badges {
       display: flex;
       gap: 4px;
@@ -173,25 +217,12 @@
       position: relative;
       display: inline-block;
     }
-    .badge-wrapper:hover::after {
-      content: attr(data-title);
-      position: absolute;
-      bottom: 100%; left: 50%;
-      transform: translateX(-50%);
-      margin-bottom: 6px;
-      background: #111214;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 13px;
-      white-space: nowrap;
-      z-index: 9999;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
-      pointer-events: none;
-    }
+
+    /* [CẢI TIẾN 3] Đã xóa bỏ CSS ::after lỗi thời ở đây */
 
     .badge-icon {
-      width: 25px; height: 25px;
+      width: 25px;
+      height: 25px;
       object-fit: contain;
       cursor: pointer;
     }
@@ -208,10 +239,14 @@
       gap: 10px;
       align-items: center;
     }
-    .activity-card.active { display: flex; }
+
+    .activity-card.active {
+      display: flex;
+    }
 
     .activity-image {
-      width: 52px; height: 52px;
+      width: 52px;
+      height: 52px;
       border-radius: 6px;
       object-fit: cover;
       flex-shrink: 0;
@@ -233,6 +268,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .activity-state,
     .activity-details-text {
       font-size: 13px;
@@ -241,6 +277,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .activity-timestamp {
       font-size: 12px;
       color: #6d6f78;
@@ -250,8 +287,9 @@
     /* External link button */
     .card-link-btn {
       position: absolute;
-      bottom: 12px; right: 12px;
-      background: rgba(255,255,255,0.07);
+      bottom: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.07);
       color: #b5bac1;
       padding: 4px 8px;
       border-radius: 4px;
@@ -260,50 +298,72 @@
       transition: all 0.2s;
       border: 1px solid transparent;
     }
+
     .card-link-btn:hover {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.15);
       color: white;
-      border-color: rgba(255,255,255,0.2);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     /* Lightboxes */
     .lightbox {
       display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0);
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
       z-index: 9999;
       justify-content: center;
       align-items: center;
       cursor: zoom-out;
       transition: background 0.3s;
     }
+
     .lightbox.active {
       display: flex;
-      background: rgba(0,0,0,0.92);
+      background: rgba(0, 0, 0, 0.92);
     }
+
     .lightbox img {
-      max-width: 90%; max-height: 90%;
+      max-width: 90%;
+      max-height: 90%;
       object-fit: contain;
       border-radius: 12px;
-      transform: scale(0.6); opacity: 0;
-      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s;
+      transform: scale(0.6);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s;
     }
-    .lightbox.active img { transform: scale(1); opacity: 1; }
-    #avatar-lightbox img { border-radius: 50%; }
+
+    .lightbox.active img {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    #avatar-lightbox img {
+      border-radius: 50%;
+    }
 
     .lightbox-close {
       position: absolute;
-      top: 18px; right: 26px;
-      font-size: 36px; color: white;
+      top: 18px;
+      right: 26px;
+      font-size: 36px;
+      color: white;
       cursor: pointer;
       transition: all 0.25s;
       opacity: 0;
       line-height: 1;
     }
-    .lightbox.active .lightbox-close { opacity: 1; }
-    .lightbox-close:hover { color: #ff9800; transform: rotate(90deg) scale(1.1); }
 
+    .lightbox.active .lightbox-close {
+      opacity: 1;
+    }
 
+    .lightbox-close:hover {
+      color: #ff9800;
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    /* Tooltip chung cho cả Status và Badge */
     .status-tooltip {
       display: none;
       position: fixed;
@@ -315,27 +375,41 @@
       max-width: 260px;
       word-wrap: break-word;
       z-index: 9999;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.8);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
       border: 1px solid #2b2d31;
       pointer-events: none;
       line-height: 1.4;
     }
-    .status-tooltip.active { display: block; }
+
+    .status-tooltip.active {
+      display: block;
+    }
 
     /* Loading state */
     .loading-pulse {
       animation: pulse 1.5s ease-in-out infinite;
     }
+
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <div class="discord-card">
-    <div class="discord-banner" id="banner"><div class="discord-banner-inner"></div></div>
+    <div class="discord-banner" id="banner">
+      <div class="discord-banner-inner"></div>
+    </div>
 
     <div class="avatar-container" id="avatar-container">
       <img id="avatar" src="" alt="Avatar">
@@ -360,24 +434,22 @@
       <div id="badges"></div>
     </div>
 
-    <a href="https://discord.com/users/639087320795971625" class="card-link-btn" target="_blank" title="Open Discord profile">
+    <a href="https://discord.com/users/639087320795971625" class="card-link-btn" target="_blank"
+      title="Open Discord profile">
       <i class="fas fa-external-link-alt"></i>
     </a>
   </div>
 
-  <!-- Avatar lightbox -->
   <div class="lightbox" id="avatar-lightbox">
     <span class="lightbox-close">&times;</span>
     <img id="avatar-lightbox-img" src="" alt="Avatar">
   </div>
 
-  <!-- Banner lightbox -->
   <div class="lightbox" id="banner-lightbox">
     <span class="lightbox-close">&times;</span>
     <img id="banner-lightbox-img" src="" alt="Banner">
   </div>
 
-  <!-- Status tooltip -->
   <div class="status-tooltip" id="status-tooltip"></div>
 
   <script>
@@ -433,13 +505,40 @@
         badges.forEach(badge => {
           const wrapper = document.createElement('div');
           wrapper.className = 'badge-wrapper';
-          wrapper.setAttribute('data-title', badge.description || 'Badge');
+
           const img = document.createElement('img');
           img.src = `https://cdn.discordapp.com/badge-icons/${badge.icon || badge.id}.png`;
           img.className = 'badge-icon';
           img.onerror = () => { wrapper.style.display = 'none'; };
+
           wrapper.appendChild(img);
           badgesEl.appendChild(wrapper);
+
+          // [CẢI TIẾN 3] Tích hợp JS Tooltip cho từng Badge qua getBoundingClientRect và position: fixed
+          wrapper.addEventListener('mouseenter', () => {
+            clearTimeout(tooltipTimeout);
+
+            tooltip.textContent = badge.description || 'Badge';
+            tooltip.classList.add('active');
+
+            // Lấy tọa độ của toàn bộ card để làm mốc cố định
+            const card = document.querySelector('.discord-card');
+            const cardRect = card.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            // Căn giữa theo chiều ngang (X) của Card
+            let left = cardRect.left + (cardRect.width / 2) - (tooltipRect.width / 2);
+
+            // Định vị chiều cao (Y) cố định đè lên phần Activity card (cách đáy card một khoảng cố định)
+            let top = cardRect.bottom - 85; // Số 74px này giúp tooltip nhảy đúng vào vị trí như trong ảnh của bạn
+
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+          });
+
+          wrapper.addEventListener('mouseleave', () => {
+            tooltipTimeout = setTimeout(() => tooltip.classList.remove('active'), 200);
+          });
         });
 
         // Lanyard (live status + activity)
@@ -498,8 +597,8 @@
               const m = Math.floor((ms / 60000) % 60);
               const h = Math.floor(ms / 3600000);
               tsEl.textContent = h > 0
-                ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} elapsed`
-                : `${m}:${String(s).padStart(2,'0')} elapsed`;
+                ? `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} elapsed`
+                : `${m}:${String(s).padStart(2, '0')} elapsed`;
             };
             tick();
             elapsedInterval = setInterval(tick, 1000);
@@ -569,12 +668,20 @@
       if (actEl.scrollWidth <= actEl.clientWidth) return;
       tooltip.textContent = actEl.textContent;
       tooltip.classList.add('active');
-      const r = actEl.getBoundingClientRect();
-      const tr = tooltip.getBoundingClientRect();
-      let left = r.left + r.width / 2 - tr.width / 2;
-      left = Math.max(8, Math.min(left, window.innerWidth - tr.width - 8));
+
+      // Lấy tọa độ của toàn bộ card để làm mốc cố định
+      const card = document.querySelector('.discord-card');
+      const cardRect = card.getBoundingClientRect();
+      const tooltipRect = tooltip.getBoundingClientRect();
+
+      // Căn giữa theo chiều ngang (X) của Card
+      let left = cardRect.left + (cardRect.width / 2) - (tooltipRect.width / 2);
+
+      // Định vị chiều cao (Y) cố định y hệt như badge
+      let top = cardRect.bottom - 85;
+
       tooltip.style.left = left + 'px';
-      tooltip.style.top = (r.bottom + 8) + 'px';
+      tooltip.style.top = top + 'px';
     }
 
     actEl.addEventListener('mouseenter', () => { clearTimeout(tooltipTimeout); showTooltip(); });
@@ -583,4 +690,5 @@
     window.addEventListener('scroll', () => tooltip.classList.remove('active'), { passive: true });
   </script>
 </body>
+
 </html>
