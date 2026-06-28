@@ -19,10 +19,11 @@
       background: transparent;
       display: flex;
       justify-content: center;
-      /* [CẢI TIẾN 1] Định vị: top-center */
       align-items: flex-start;
-      min-height: 100vh;
-      padding: 12px;
+      /* Bỏ min-height: 100vh để body co lại vừa với nội dung */
+      padding: 0;
+      margin: 0;
+      overflow: hidden; /* Ngăn scroll ngang/dọc khi embed */
     }
 
     .discord-card {
@@ -34,6 +35,8 @@
       border-radius: 16px;
       width: 100%;
       max-width: 300px;
+      /* Trên mobile nhỏ hơn 320px, card tự thu nhỏ */
+      min-width: 0;
       color: white;
       overflow: visible;
       padding: 0 0 16px 0;
@@ -618,6 +621,20 @@
 
     updateDiscord();
     setInterval(updateDiscord, 20000);
+
+    // ── Tự động báo chiều cao thực cho iframe cha (Google Sites) ──
+    function reportHeight() {
+      const card = document.querySelector('.discord-card');
+      if (!card) return;
+      const h = card.getBoundingClientRect().height;
+      window.parent.postMessage({ type: 'resize', height: Math.ceil(h) + 8 }, '*');
+    }
+    reportHeight();
+    // Theo dõi thay đổi DOM (badge, activity card hiện/ẩn) để cập nhật lại chiều cao
+    new MutationObserver(() => setTimeout(reportHeight, 100)).observe(
+      document.body,
+      { childList: true, subtree: true, attributes: true }
+    );
 
     // ── Lightbox helpers ──────────────────────────────────────────
     function openLightbox(id, imgSrc) {
