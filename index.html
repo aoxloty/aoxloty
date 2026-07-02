@@ -20,10 +20,9 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      /* Bỏ min-height: 100vh để body co lại vừa với nội dung */
       padding: 0;
       margin: 0;
-      overflow: hidden; /* Ngăn scroll ngang/dọc khi embed */
+      overflow: hidden;
     }
 
     .discord-card {
@@ -35,15 +34,12 @@
       border-radius: 16px;
       width: 100%;
       max-width: 300px;
-      /* Trên mobile nhỏ hơn 320px, card tự thu nhỏ */
       min-width: 0;
       color: white;
       overflow: visible;
       padding: 0 0 16px 0;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     }
 
-    /* Banner */
     .discord-banner {
       width: 100%;
       height: 80px;
@@ -56,7 +52,6 @@
       transition: filter 0.3s;
     }
 
-    /* [CẢI TIẾN 2] Khắc phục hover đè avatar bằng việc áp dụng hiệu ứng hoàn toàn bên trong lớp bọc cô lập */
     .discord-banner-inner {
       position: absolute;
       inset: 0;
@@ -95,7 +90,6 @@
       opacity: 1;
     }
 
-    /* Avatar */
     .avatar-container {
       position: relative;
       width: 80px;
@@ -174,7 +168,6 @@
       z-index: 10;
     }
 
-    /* User info */
     .user-info {
       display: flex;
       flex-direction: column;
@@ -221,8 +214,6 @@
       display: inline-block;
     }
 
-    /* [CẢI TIẾN 3] Đã xóa bỏ CSS ::after lỗi thời ở đây */
-
     .badge-icon {
       width: 25px;
       height: 25px;
@@ -230,64 +221,6 @@
       cursor: pointer;
     }
 
-    /* Activity card */
-    .activity-card {
-      background: #1e1f22;
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-top: 6px;
-      width: 100%;
-      display: none;
-      flex-direction: row;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .activity-card.active {
-      display: flex;
-    }
-
-    .activity-image {
-      width: 52px;
-      height: 52px;
-      border-radius: 6px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .activity-details {
-      flex: 1;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .activity-name {
-      font-weight: 600;
-      font-size: 15px;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .activity-state,
-    .activity-details-text {
-      font-size: 13px;
-      color: #b5bac1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .activity-timestamp {
-      font-size: 12px;
-      color: #6d6f78;
-      margin-top: 2px;
-    }
-
-    /* External link button */
     .card-link-btn {
       position: absolute;
       bottom: 12px;
@@ -308,7 +241,6 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* Lightboxes */
     .lightbox {
       display: none;
       position: fixed;
@@ -366,7 +298,6 @@
       transform: rotate(90deg) scale(1.1);
     }
 
-    /* Tooltip chung cho cả Status và Badge */
     .status-tooltip {
       display: none;
       position: fixed;
@@ -378,7 +309,6 @@
       max-width: 260px;
       word-wrap: break-word;
       z-index: 9999;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
       border: 1px solid #2b2d31;
       pointer-events: none;
       line-height: 1.4;
@@ -388,7 +318,6 @@
       display: block;
     }
 
-    /* Loading state */
     .loading-pulse {
       animation: pulse 1.5s ease-in-out infinite;
     }
@@ -424,16 +353,6 @@
       <div id="username" class="loading-pulse">Loading...</div>
       <div id="activity" class="loading-pulse">—</div>
 
-      <div id="activity-card" class="activity-card">
-        <img id="activity-image" class="activity-image" src="" alt="Activity">
-        <div class="activity-details">
-          <div id="activity-name" class="activity-name"></div>
-          <div id="activity-state" class="activity-state"></div>
-          <div id="activity-details-text" class="activity-details-text"></div>
-          <div id="activity-timestamp" class="activity-timestamp"></div>
-        </div>
-      </div>
-
       <div id="badges"></div>
     </div>
 
@@ -459,23 +378,19 @@
     const USER_ID = "639087320795971625";
     const STATUS_COLORS = { online: '#23a55a', idle: '#f0b232', dnd: '#f23f43', offline: '#80848e' };
     let currentBannerUrl = '';
-    let elapsedInterval = null;
 
     async function updateDiscord() {
       try {
-        // Profile data (avatar, banner, badges, decoration)
         const profileRes = await fetch(`https://dcdn.dstn.to/profile/${USER_ID}`);
         const profile = await profileRes.json();
         const user = profile.user;
 
-        // Avatar
         const ext = user.avatar?.startsWith('a_') ? 'gif' : 'webp';
         document.getElementById('avatar').src =
           `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
         document.getElementById('username').textContent = user.global_name || user.username;
         document.getElementById('username').classList.remove('loading-pulse');
 
-        // Avatar decoration
         const decoData = profile.discord_user?.avatar_decoration_data
           || user?.avatar_decoration_data
           || profile.avatar_decoration_data;
@@ -488,7 +403,6 @@
           deco.style.display = 'none';
         }
 
-        // Banner
         const bannerEl = document.getElementById('banner');
         if (user.banner) {
           const bext = user.banner.startsWith('a_') ? 'gif' : 'png';
@@ -501,7 +415,6 @@
           currentBannerUrl = '';
         }
 
-        // Badges
         const badgesEl = document.getElementById('badges');
         badgesEl.innerHTML = '';
         const badges = profile.badges || profile.user_badges || [];
@@ -517,23 +430,18 @@
           wrapper.appendChild(img);
           badgesEl.appendChild(wrapper);
 
-          // [CẢI TIẾN 3] Tích hợp JS Tooltip cho từng Badge qua getBoundingClientRect và position: fixed
           wrapper.addEventListener('mouseenter', () => {
             clearTimeout(tooltipTimeout);
 
             tooltip.textContent = badge.description || 'Badge';
             tooltip.classList.add('active');
 
-            // Lấy tọa độ của toàn bộ card để làm mốc cố định
             const card = document.querySelector('.discord-card');
             const cardRect = card.getBoundingClientRect();
             const tooltipRect = tooltip.getBoundingClientRect();
 
-            // Căn giữa theo chiều ngang (X) của Card
             let left = cardRect.left + (cardRect.width / 2) - (tooltipRect.width / 2);
-
-            // Định vị chiều cao (Y) cố định đè lên phần Activity card (cách đáy card một khoảng cố định)
-            let top = cardRect.bottom - 85; // Số 74px này giúp tooltip nhảy đúng vào vị trí như trong ảnh của bạn
+            let top = cardRect.bottom - 85;
 
             tooltip.style.left = left + 'px';
             tooltip.style.top = top + 'px';
@@ -544,73 +452,17 @@
           });
         });
 
-        // Lanyard (live status + activity)
         const lanyardRes = await fetch(`https://api.lanyard.rest/v1/users/${USER_ID}`);
         const lanyardJson = await lanyardRes.json();
         const d = lanyardJson.data;
 
-        // Status dot
         document.getElementById('status').style.backgroundColor =
           STATUS_COLORS[d.discord_status] || STATUS_COLORS.offline;
 
-        // Custom status text
         const customStatus = d.activities.find(a => a.type === 4);
         const activityEl = document.getElementById('activity');
         activityEl.textContent = customStatus?.state || '';
         activityEl.classList.remove('loading-pulse');
-
-        // Activity card
-        if (elapsedInterval) { clearInterval(elapsedInterval); elapsedInterval = null; }
-
-        const mainActivity = d.activities.find(a => a.type !== 4);
-        const activityCard = document.getElementById('activity-card');
-
-        if (mainActivity) {
-          activityCard.classList.add('active');
-
-          // Activity image
-          const actImg = document.getElementById('activity-image');
-          const asset = mainActivity.assets?.large_image || mainActivity.assets?.small_image;
-          if (asset) {
-            let url = '';
-            if (mainActivity.name === 'Spotify') {
-              url = `https://i.scdn.co/image/${asset.replace('spotify:', '')}`;
-            } else if (asset.startsWith('mp:external/')) {
-              url = `https://media.discordapp.net/external/${asset.split('mp:external/')[1]}`;
-            } else if (mainActivity.application_id) {
-              url = `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${asset}.png`;
-            }
-            actImg.src = url;
-            actImg.style.display = url ? 'block' : 'none';
-          } else {
-            actImg.style.display = 'none';
-          }
-
-          document.getElementById('activity-name').textContent = mainActivity.name || '';
-          document.getElementById('activity-state').textContent = mainActivity.state || '';
-          document.getElementById('activity-details-text').textContent = mainActivity.details || '';
-
-          // Elapsed time
-          const tsEl = document.getElementById('activity-timestamp');
-          if (mainActivity.timestamps?.start) {
-            const start = mainActivity.timestamps.start;
-            const tick = () => {
-              const ms = Date.now() - start;
-              const s = Math.floor((ms / 1000) % 60);
-              const m = Math.floor((ms / 60000) % 60);
-              const h = Math.floor(ms / 3600000);
-              tsEl.textContent = h > 0
-                ? `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} elapsed`
-                : `${m}:${String(s).padStart(2, '0')} elapsed`;
-            };
-            tick();
-            elapsedInterval = setInterval(tick, 1000);
-          } else {
-            tsEl.textContent = '';
-          }
-        } else {
-          activityCard.classList.remove('active');
-        }
 
       } catch (err) {
         console.error('Discord widget error:', err);
@@ -622,7 +474,6 @@
     updateDiscord();
     setInterval(updateDiscord, 20000);
 
-    // ── Tự động báo chiều cao thực cho iframe cha (Google Sites) ──
     function reportHeight() {
       const card = document.querySelector('.discord-card');
       if (!card) return;
@@ -630,13 +481,11 @@
       window.parent.postMessage({ type: 'resize', height: Math.ceil(h) + 8 }, '*');
     }
     reportHeight();
-    // Theo dõi thay đổi DOM (badge, activity card hiện/ẩn) để cập nhật lại chiều cao
     new MutationObserver(() => setTimeout(reportHeight, 100)).observe(
       document.body,
       { childList: true, subtree: true, attributes: true }
     );
 
-    // ── Lightbox helpers ──────────────────────────────────────────
     function openLightbox(id, imgSrc) {
       const lb = document.getElementById(id);
       lb.querySelector('img').src = imgSrc;
@@ -648,20 +497,17 @@
       document.body.style.overflow = '';
     }
 
-    // Avatar click
     document.getElementById('avatar-container').addEventListener('click', () => {
       const src = document.getElementById('avatar').src.replace('size=256', 'size=1024');
       openLightbox('avatar-lightbox', src);
     });
 
-    // Banner click
     document.getElementById('banner').addEventListener('click', () => {
       if (currentBannerUrl) {
         openLightbox('banner-lightbox', currentBannerUrl);
       }
     });
 
-    // Close lightboxes
     document.querySelectorAll('.lightbox').forEach(lb => {
       lb.addEventListener('click', e => {
         if (e.target === lb || e.target.classList.contains('lightbox-close')) {
@@ -676,7 +522,6 @@
       }
     });
 
-    // ── Custom status tooltip ─────────────────────────────────────
     const actEl = document.getElementById('activity');
     const tooltip = document.getElementById('status-tooltip');
     let tooltipTimeout;
@@ -686,15 +531,11 @@
       tooltip.textContent = actEl.textContent;
       tooltip.classList.add('active');
 
-      // Lấy tọa độ của toàn bộ card để làm mốc cố định
       const card = document.querySelector('.discord-card');
       const cardRect = card.getBoundingClientRect();
       const tooltipRect = tooltip.getBoundingClientRect();
 
-      // Căn giữa theo chiều ngang (X) của Card
       let left = cardRect.left + (cardRect.width / 2) - (tooltipRect.width / 2);
-
-      // Định vị chiều cao (Y) cố định y hệt như badge
       let top = cardRect.bottom - 85;
 
       tooltip.style.left = left + 'px';
